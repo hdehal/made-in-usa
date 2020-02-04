@@ -1,32 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Put any other imports below so that CSS from your
-// components takes precedence over default styles.
+import BootstrapTable from 'react-bootstrap-table-next';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+// dummy data
+const products = [
+  { id: 1, name: "Item 1", price: 100 },
+  { id: 2, name: "Item 2", price: 102 }
+];
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID'
+}, {
+  dataField: 'name',
+  text: 'Product Name'
+}, {
+  dataField: 'price',
+  text: 'Product Price'
+}];
 
-
-    </div>
-  );
-}
-
-export default App;
+export default () =>
+  <BootstrapTable keyField='id' data={ products } columns={ columns } />
