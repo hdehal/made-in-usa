@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Create from './components/Create';
@@ -11,7 +12,7 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link to={'/'} className="navbar-brand"><span role="img" aria-label="US flag">🇺🇸</span> Made in USA List</Link>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
@@ -26,8 +27,7 @@ class App extends Component {
                 </li>
               </ul>
             </div>
-          </nav> <br/>
-          <h2>Welcome</h2> <br/>
+          </nav>
           <Switch>
               <Route exact path='/create' component={ Create } />
               <Route path='/edit/:id' component={ Edit } />
