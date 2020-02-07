@@ -9,13 +9,19 @@ const data = [
 ];
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Company'
 }, {
-  dataField: 'name',
-  text: 'Product Name'
+  dataField: 'url',
+  text: 'URL'
 }, {
-  dataField: 'price',
-  text: 'Product Price'
+  dataField: 'loc',
+  text: 'Location'
+}, {
+  dataField: 'gender',
+  text: 'Gender'
+}, {
+  dataField: 'cat',
+  text: 'Category'
 }];
 
 const ProductTable = () => {
@@ -27,6 +33,7 @@ const ProductTable = () => {
       striped
       hover
       condensed
+      bootstrap4
     />
   );
 };
