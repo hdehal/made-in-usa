@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import ProductTable from './ProductTable';
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render(<ProductTable />, document.getElementById('root'));
+import App from './App';
+
+ReactDOM.render(
+  <BrowserRouter>
+  <App />
+  </BrowserRouter>, document.getElementById('root'));
