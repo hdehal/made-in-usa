@@ -7,6 +7,16 @@ import Create from './components/Create';
 import Edit from './components/Edit';
 import Index from './components/Index';
 
+import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk'
+
+Stitch.initializeDefaultAppClient('miusa-gxhmx');
+
+const client = Stitch.defaultAppClient;
+
+client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+  console.log(`logged in anonymously as user ${user.id}`)
+});
+
 class App extends Component {
   render() {
     return (
