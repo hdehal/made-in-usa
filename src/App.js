@@ -27,8 +27,7 @@ class App extends Component {
                 </li>
               </ul>
             </div>
-          </nav> <br/>
-          <h2>Welcome</h2> <br/>
+          </nav>
           <Switch>
               <Route exact path='/create' component={ Create } />
               <Route path='/edit/:id' component={ Edit } />
