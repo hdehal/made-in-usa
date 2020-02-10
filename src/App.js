@@ -6,57 +6,52 @@ import BootstrapTable from 'react-bootstrap-table-next';
 
 import Create from './components/Create';
 import Edit from './components/Edit';
-
-const {
-    Stitch,
-    RemoteMongoClient,
-    AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
-
-const client = Stitch.initializeDefaultAppClient('miusa-gxhmx');
-
-const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('vendor');
-
-client.auth.loginWithCredential(new AnonymousCredential()).then(() =>
-  db.collection('vendor-item').find().asArray()
-).then(docs => {
-    console.log("Found docs", docs);
-    const html = docs.map(docs => `
-    <div>${docs._id}</div>
-    <div>${docs.owner_id}</div>
-    <div>${docs.number}</div>`);
-    document.getElementById("comments").innerHTML = html;
-}).catch(err => {
-    console.error(err)
-});
-
-client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
-    console.log(`logged in anonymously as user ${user.id}`)
-  });
+import 'mongodb-stitch';
+import { Stitch, RemoteMongoClient, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 
 // dummy data
 const data = [
-    { id: 1, name: "Item 1", url: 100, loc:"sf, ca" },
-    { id: 2, name: "Item 2", url: 102 }
-  ];
-  const columns = [{
-    dataField: 'id',
-    text: 'Company'
-  }, {
-    dataField: 'url',
-    text: 'URL'
-  }, {
-    dataField: 'loc',
-    text: 'Location'
-  }, {
-    dataField: 'gender',
-    text: 'Gender'
-  }, {
-    dataField: 'cat',
-    text: 'Category'
-  }];
+  { id: 1, name: "Item 1", url: 100, loc:"sf, ca" },
+  { id: 2, name: "Item 2", url: 102, loc:"sf, ca" }
+];
+const columns = [{
+  dataField: 'id',
+  text: 'Company'
+}, {
+  dataField: 'url',
+  text: 'URL'
+}, {
+  dataField: 'loc',
+  text: 'Location'
+}];
 
-class App extends Component {
+export class App extends Component {
+
+// Get the existing Stitch client
+const stitchClient = Stitch.initializeDefaultAppClient("miusa-gxhmx");
+
+// Get a client of the Remote Mongo Service for database access
+const mongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas')
+
+// Retrieve a database object
+const db = mongoClient.db('vendor')
+
+// Retrieve the collection in the database
+const vendorTable = db.collection('vendor-item')
+
+// Find documents and log them to console
+vendorTable.find({}, {limit: 8})
+  .asArray()
+  .then(results => console.log('Results:', results))
+  .then(results => {
+    this.setState({ results });
+    console.log("Found docs", results);  
+
+  })
+  .catch(err => {
+    console.warn("nope", err);
+  });
+
   render() {
     return (
       <Router>
@@ -83,14 +78,14 @@ class App extends Component {
           </Switch>
 
           <BootstrapTable
-        keyField="id"
-        data={data}
-        columns={columns}
-        striped
-        hover
-        condensed
-        bootstrap4
-      />
+            keyField="id"
+            data={results}
+            columns={columns}
+            striped
+            hover
+            condensed
+            bootstrap4
+          />
       
         </div><div id="comments">xx</div>
         
