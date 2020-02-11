@@ -5,14 +5,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { Stitch, RemoteMongoClient, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 
-// connect to MongoDB Stitch
+// Connect to MongoDB Stitch
 // Get the existing Stitch client
 const stitchClient = Stitch.initializeDefaultAppClient("miusa-gxhmx");
 
 // Get a client of the Remote Mongo Service for database access
 const mongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas')
 
-// Retrieve a database object
+// Retrieve the database
 const db = mongoClient.db('vendor')
 
 // Retrieve the collection in the database
@@ -38,6 +38,7 @@ const columns = [{
 
 class App extends Component {
 
+  // Initial state
   constructor(props){
     super(props);
     this.state = {
@@ -47,29 +48,28 @@ class App extends Component {
 
   getData(){
     setTimeout(() => {
-      console.log('Our data is fetched');
-// Log in with anonymous credential
-stitchClient.auth
-.loginWithCredential(new AnonymousCredential())
-.then((user) => {
-    console.log(`Logged in as anonymous user with id: ${user.id}`)
-})
+      console.log('Data succesfully fetched from MongoDB Stitch');
 
-// Find database documents
-var self = this;
-vendorTable.find({}, {limit: 12})
-.toArray()
-.then(data => 
-//  console.log("yep", data)
-    self.setState({data})
-)
-.catch(err => {
-  console.warn("nope", err);
-});
+      // Login with anonymous credential
+      stitchClient.auth
+      .loginWithCredential(new AnonymousCredential())
+      .then((user) => {
+        console.log(`Logged in as anonymous user with id: ${user.id}`)
+      })
 
+      // Find database documents
+      var self = this;
+      vendorTable.find({}, {limit: 12})
+      .toArray()
+      .then(data => 
+        self.setState({data})
+      )
 
-
-    }, 1000)
+      // Error logging
+      .catch(err => {
+        console.warn("Error:", err);
+      });
+    })
   }
 
   async componentDidMount(){
@@ -77,10 +77,6 @@ vendorTable.find({}, {limit: 12})
   }
 
   render() {
-
-
-
-    
     return(
       <BootstrapTable
         keyField="id"
