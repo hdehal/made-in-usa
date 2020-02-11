@@ -6,15 +6,15 @@ export default class Create extends Component {
         super(props);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangeUrl = this.onChangeUrl.bind(this);
-        this.onChangeLocation = this.onChangeLocation.bind(this);
+        this.onChangeLoc = this.onChangeLoc.bind(this);
         this.onChangeGender = this.onChangeGender.bind(this);
         this.onChangeTags = this.onChangeTags.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
   
         this.state = {
-            company_name: '',
+            company: '',
             url: '',
-            location: '',
+            loc: '',
             gender: '',
             tags:''
         }
@@ -22,7 +22,7 @@ export default class Create extends Component {
 
     onChangeCompanyName(e) {
     this.setState({
-        company_name: e.target.value
+        company: e.target.value
     });
     }
     onChangeUrl(e) {
@@ -30,29 +30,29 @@ export default class Create extends Component {
         url: e.target.value
     });
     }
-    onChangeLocation(e) {
+    onChangeLoc(e) {
       this.setState({
-        location: e.target.value
-      });
+        loc: e.target.value
+    });
     }
     onChangeGender(e) {
       this.setState({
         gender: e.target.value
-      })  
+    });
     }
     onChangeTags(e) {
       this.setState({
         tags: e.target.value
-      })
+    });
     }
   
     onSubmit(e) {
       e.preventDefault();
-      console.log(`The values are ${this.state.company_name}, ${this.state.url}, ${this.state.location}, ${this.state.gender}, and ${this.state.tags}`)
+      console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.tags}`)
       this.setState({
-        company_name: '',
+        company: '',
         url: '',
-        location: '',
+        loc: '',
         gender: '',
         tags: ''
     })
@@ -68,7 +68,7 @@ export default class Create extends Component {
                         <input 
                             type="text" 
                             className="form-control"
-                            value={this.state.company_name}
+                            value={this.state.company}
                             onChange={this.onChangeCompanyName}
                         />
                     </div>
@@ -86,8 +86,8 @@ export default class Create extends Component {
                         <input 
                             type="text" 
                             className="form-control"
-                            value={this.state.location}
-                            onChange={this.onChangeLocation}
+                            value={this.state.loc}
+                            onChange={this.onChangeLoc}
                         />
                     </div>
                     <div className="form-group">
