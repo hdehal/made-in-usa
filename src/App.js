@@ -47,7 +47,6 @@ class App extends Component {
   }
 
   getData(){
-    setTimeout(() => {
       console.log('Data succesfully fetched from MongoDB Stitch');
 
       // Login with anonymous credential
@@ -58,18 +57,16 @@ class App extends Component {
       })
 
       // Find database documents
-      var self = this;
-      vendorTable.find({}, {limit: 12})
+      vendorTable.find({})
       .toArray()
       .then(data => 
-        self.setState({data})
+        this.setState({data})
       )
 
       // Error logging
       .catch(err => {
         console.warn("Error:", err);
       });
-    })
   }
 
   async componentDidMount(){
