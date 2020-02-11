@@ -3,99 +3,95 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
+import { Stitch, RemoteMongoClient, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 
-import Create from './components/Create';
-import Edit from './components/Edit';
+// connect to MongoDB Stitch
+// Get the existing Stitch client
+const stitchClient = Stitch.initializeDefaultAppClient("miusa-gxhmx");
 
-const {
-    Stitch,
-    RemoteMongoClient,
-    AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
+// Get a client of the Remote Mongo Service for database access
+const mongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas')
 
-const client = Stitch.initializeDefaultAppClient('miusa-gxhmx');
+// Retrieve a database object
+const db = mongoClient.db('vendor')
 
-const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('vendor');
+// Retrieve the collection in the database
+const vendorTable = db.collection('vendor-item')
 
-client.auth.loginWithCredential(new AnonymousCredential()).then(() =>
-  db.collection('vendor-item').find().asArray()
-).then(docs => {
-    console.log("Found docs", docs);
-    const html = docs.map(docs => `
-    <div>${docs._id}</div>
-    <div>${docs.owner_id}</div>
-    <div>${docs.number}</div>`);
-    document.getElementById("comments").innerHTML = html;
-}).catch(err => {
-    console.error(err)
-});
-
-client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
-    console.log(`logged in anonymously as user ${user.id}`)
-  });
-
-// dummy data
-const data = [
-    { id: 1, name: "Item 1", url: 100, loc:"sf, ca" },
-    { id: 2, name: "Item 2", url: 102 }
-  ];
-  const columns = [{
-    dataField: 'id',
-    text: 'Company'
-  }, {
-    dataField: 'url',
-    text: 'URL'
-  }, {
-    dataField: 'loc',
-    text: 'Location'
-  }, {
-    dataField: 'gender',
-    text: 'Gender'
-  }, {
-    dataField: 'cat',
-    text: 'Category'
-  }];
+// dummy JSON data
+const columns = [{
+  dataField: 'company',
+  text: 'Company'
+}, {
+  dataField: 'url',
+  text: 'URL'
+}, {
+  dataField: 'loc',
+  text: 'Location'
+}, {
+  dataField: 'gender',
+  text: 'Gender'
+}, {
+  dataField: 'tags',
+  text: 'Tags'
+}];
 
 class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link to={'/'} className="navbar-brand"><span role="img" aria-label="US flag">🇺🇸</span> Made in USA List</Link>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                  <Link to={'/'} className="nav-link">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to={'/create'} className="nav-link">Create</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to={'/edit'} className="nav-link">Edit</Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
-          <Switch>
-              <Route exact path='/create' component={ Create } />
-              <Route path='/edit/:id' component={ Edit } />
-          </Switch>
 
-          <BootstrapTable
+  constructor(props){
+    super(props);
+    this.state = {
+      data: []
+    }
+  }
+
+  getData(){
+    setTimeout(() => {
+      console.log('Our data is fetched');
+// Log in with anonymous credential
+stitchClient.auth
+.loginWithCredential(new AnonymousCredential())
+.then((user) => {
+    console.log(`Logged in as anonymous user with id: ${user.id}`)
+})
+
+// Find database documents
+var self = this;
+vendorTable.find({}, {limit: 12})
+.toArray()
+.then(data => 
+//  console.log("yep", data)
+    self.setState({data})
+)
+.catch(err => {
+  console.warn("nope", err);
+});
+
+
+
+    }, 1000)
+  }
+
+  async componentDidMount(){
+    this.getData();
+  }
+
+  render() {
+
+
+
+    
+    return(
+      <BootstrapTable
         keyField="id"
-        data={data}
+        data={this.state.data}
         columns={columns}
         striped
         hover
         condensed
         bootstrap4
       />
-      
-        </div><div id="comments">xx</div>
-        
-      </Router>
-    );
+    )
   }
 }
 
