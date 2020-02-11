@@ -3,22 +3,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { Stitch, RemoteMongoClient, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import { Stitch, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
 
-// Connect to MongoDB Stitch
-// Get the existing Stitch client
-const stitchClient = Stitch.initializeDefaultAppClient("miusa-gxhmx");
+// Define MongoDB Stitch App ID
+const APP_ID = "miusa-gxhmx";
 
-// Get a client of the Remote Mongo Service for database access
-const mongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas')
+// Initialize MongoDB Stitch
+const app = Stitch.hasAppClient(APP_ID)
+  ? Stitch.getAppClient(APP_ID)
+  : Stitch.initializeAppClient(APP_ID);
 
-// Retrieve the database
-const db = mongoClient.db('vendor')
+// Define client/factory
+  const mongoClient = app.getServiceClient(
+    RemoteMongoClient.factory,
+    "mongodb-atlas"
+  );  
 
-// Retrieve the collection in the database
-const vendorTable = db.collection('vendor-item')
+// Define db and collection
+  const items = mongoClient.db("vendor").collection("vendor-item");
 
-// dummy JSON data
+// JSON table column data
 const columns = [{
   dataField: 'company',
   text: 'Company'
@@ -47,17 +51,9 @@ class App extends Component {
   }
 
   getData(){
-      console.log('Data succesfully fetched from MongoDB Stitch');
-
-      // Login with anonymous credential
-      stitchClient.auth
-      .loginWithCredential(new AnonymousCredential())
-      .then((user) => {
-        console.log(`Logged in as anonymous user with id: ${user.id}`)
-      })
 
       // Find database documents
-      vendorTable.find({})
+      items.find({})
       .toArray()
       .then(data => 
         this.setState({data})
