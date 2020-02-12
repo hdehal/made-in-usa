@@ -93,7 +93,7 @@ class App extends Component {
   
     onSubmit(e) {
       e.preventDefault();
-      console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.tags}`)
+      // console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.tags}`)
 
       var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.tags }
 
@@ -108,7 +108,10 @@ class App extends Component {
         loc: '',
         gender: '',
         tags: ''
-    })
+      })
+
+      // getData after insertOne new item
+      this.getData();
     }
 
   getData(){
