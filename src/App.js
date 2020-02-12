@@ -14,18 +14,19 @@ const app = Stitch.hasAppClient(APP_ID)
   : Stitch.initializeAppClient(APP_ID);
 
 // Define client/factory
-  const mongoClient = app.getServiceClient(
+const mongoClient = app.getServiceClient(
     RemoteMongoClient.factory,
     "mongodb-atlas"
   );  
 
 // Define db and collection
-  const item = mongoClient.db("vendor").collection("vendor-item");
+const item = mongoClient.db("vendor").collection("vendor-item");
 
 // JSON table column data
 const columns = [{
   dataField: 'company',
-  text: 'Company'
+  text: 'Company',
+  sort: true
 }, {
   dataField: 'url',
   text: 'URL'
@@ -54,7 +55,12 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      data: []
+      data: [],
+      company: [],
+      url: [],
+      loc: [],
+      gender: [],
+      tags: []
     }
   }
 
@@ -91,6 +97,7 @@ class App extends Component {
 
       var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.tags }
 
+      // Insert new item
       item.insertOne(newItem)
       .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
       .catch(err => console.error(`Failed to insert item: ${err}`))
