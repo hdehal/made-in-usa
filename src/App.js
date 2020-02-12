@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { Stitch, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
-
-import Create from './components/Create';
-import Edit from './components/Edit';
 
 // Define MongoDB Stitch App ID
 const APP_ID = "miusa-gxhmx";
@@ -17,18 +14,19 @@ const app = Stitch.hasAppClient(APP_ID)
   : Stitch.initializeAppClient(APP_ID);
 
 // Define client/factory
-  const mongoClient = app.getServiceClient(
+const mongoClient = app.getServiceClient(
     RemoteMongoClient.factory,
     "mongodb-atlas"
   );  
 
 // Define db and collection
-  const items = mongoClient.db("vendor").collection("vendor-item");
+const item = mongoClient.db("vendor").collection("vendor-item");
 
 // JSON table column data
 const columns = [{
   dataField: 'company',
-  text: 'Company'
+  text: 'Company',
+  sort: true
 }, {
   dataField: 'url',
   text: 'URL'
@@ -48,15 +46,77 @@ class App extends Component {
   // Initial state
   constructor(props){
     super(props);
+
+    this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
+    this.onChangeUrl = this.onChangeUrl.bind(this);
+    this.onChangeLoc = this.onChangeLoc.bind(this);
+    this.onChangeGender = this.onChangeGender.bind(this);
+    this.onChangeTags = this.onChangeTags.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
-      data: []
+      data: [],
+      company: [],
+      url: [],
+      loc: [],
+      gender: [],
+      tags: []
     }
   }
 
-  getData(){
+  
+  onChangeCompanyName(e) {
+    this.setState({
+        company: e.target.value
+    });
+    }
+    onChangeUrl(e) {
+    this.setState({
+        url: e.target.value
+    });
+    }
+    onChangeLoc(e) {
+      this.setState({
+        loc: e.target.value
+    });
+    }
+    onChangeGender(e) {
+      this.setState({
+        gender: e.target.value
+    });
+    }
+    onChangeTags(e) {
+      this.setState({
+        tags: e.target.value
+    });
+    }
+  
+    onSubmit(e) {
+      e.preventDefault();
+      // console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.tags}`)
 
+      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.tags }
+
+      // Insert new item
+      item.insertOne(newItem)
+      .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
+      .catch(err => console.error(`Failed to insert item: ${err}`))
+
+      this.setState({
+        company: '',
+        url: '',
+        loc: '',
+        gender: '',
+        tags: ''
+      })
+
+      // getData after insertOne new item
+      this.getData();
+    }
+
+  getData(){
       // Find database documents
-      items.find({})
+      item.find({})
       .toArray()
       .then(data => 
         this.setState({data})
@@ -83,15 +143,10 @@ class App extends Component {
               <li className="nav-item">
                   <Link to={'/'} className="nav-link">Home</Link>
                 </li>
-                <li className="nav-item">
-                  <Link to={'/create'} className="nav-link">Create</Link>
-                </li>
               </ul>
             </div>
           </nav>
           <Switch>
-              <Route exact path='/create' component={ Create } />
-              <Route path='/edit/:id' component={ Edit } />
           </Switch>
 
           <BootstrapTable
@@ -103,6 +158,64 @@ class App extends Component {
             condensed
             bootstrap4
           />
+
+
+
+
+<div>
+                <h3>Add New Company</h3>
+                <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                        <label>Company Name:  </label>
+                        <input 
+                            type="text" 
+                            className="form-control"
+                            value={this.state.company}
+                            onChange={this.onChangeCompanyName}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>URL: </label>
+                        <input 
+                            type="text" 
+                            className="form-control"
+                            value={this.state.url}
+                            onChange={this.onChangeUrl}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Location: </label>
+                        <input 
+                            type="text" 
+                            className="form-control"
+                            value={this.state.loc}
+                            onChange={this.onChangeLoc}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Gender: </label>
+                        <input 
+                            type="text" 
+                            className="form-control"
+                            value={this.state.gender}
+                            onChange={this.onChangeGender}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Category/Tags: </label>
+                        <input 
+                            type="text" 
+                            className="form-control"
+                            value={this.state.tags}
+                            onChange={this.onChangeTags}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input type="submit" value="Submit" className="btn btn-primary"/>
+                    </div>
+                </form>
+        </div>
+
         </div>
       </Router>
     )
