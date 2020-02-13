@@ -46,7 +46,10 @@ const columns = [
     dataField: 'url',
     text: 'URL',
     sort: true,
-    sortCaret: sortFunc
+    sortCaret: sortFunc,
+    formatter: (rowContent, row) => {
+      return <><a href={rowContent} target="_blank" rel="noopener noreferrer">{rowContent}</a></>;
+    }
 }, {
     dataField: 'loc',
     text: 'Location',
