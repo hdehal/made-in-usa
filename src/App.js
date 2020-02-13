@@ -23,22 +23,27 @@ const mongoClient = app.getServiceClient(
 const item = mongoClient.db("vendor").collection("vendor-item");
 
 // JSON table column data
-const columns = [{
-  dataField: 'company',
-  text: 'Company',
-  sort: true
+const columns = [
+  {
+    dataField: 'id',
+    text: 'ID',
+    hidden: true
+  }, {
+    dataField: 'company',
+    text: 'Company',
+    sort: true
 }, {
-  dataField: 'url',
-  text: 'URL'
+    dataField: 'url',
+    text: 'URL'
 }, {
-  dataField: 'loc',
-  text: 'Location'
+    dataField: 'loc',
+    text: 'Location'
 }, {
-  dataField: 'gender',
-  text: 'Gender'
+    dataField: 'gender',
+    text: 'Gender'
 }, {
-  dataField: 'tags',
-  text: 'Tags'
+    dataField: 'tags',
+    text: 'Tags'
 }];
 
 class App extends Component {
@@ -56,6 +61,7 @@ class App extends Component {
 
     this.state = {
       data: [],
+      // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
       url: [],
       loc: [],
@@ -64,7 +70,6 @@ class App extends Component {
     }
   }
 
-  
   onChangeCompanyName(e) {
     this.setState({
         company: e.target.value
@@ -119,8 +124,8 @@ class App extends Component {
       item.find({})
       .toArray()
       .then(data => 
-        this.setState({data})
-      )
+        data.map(x=>{ return { ...x, id: x._id.toString()}; })
+      ).then(data => this.setState({data}))
 
       // Error logging
       .catch(err => {
@@ -159,63 +164,59 @@ class App extends Component {
             bootstrap4
           />
 
-
-
-
-<div>
-                <h3>Add New Company</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Company Name:  </label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            value={this.state.company}
-                            onChange={this.onChangeCompanyName}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>URL: </label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            value={this.state.url}
-                            onChange={this.onChangeUrl}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Location: </label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            value={this.state.loc}
-                            onChange={this.onChangeLoc}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Gender: </label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            value={this.state.gender}
-                            onChange={this.onChangeGender}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Category/Tags: </label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            value={this.state.tags}
-                            onChange={this.onChangeTags}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Submit" className="btn btn-primary"/>
-                    </div>
-                </form>
-        </div>
-
+          <div>
+            <h3>Add New Company</h3>
+            <form onSubmit={this.onSubmit}>
+                <div className="form-group">
+                    <label>Company Name:  </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.company}
+                        onChange={this.onChangeCompanyName}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>URL: </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.url}
+                        onChange={this.onChangeUrl}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Location: </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.loc}
+                        onChange={this.onChangeLoc}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Gender: </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.gender}
+                        onChange={this.onChangeGender}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Category/Tags: </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.tags}
+                        onChange={this.onChangeTags}
+                    />
+                </div>
+                <div className="form-group">
+                    <input type="submit" value="Submit" className="btn btn-primary"/>
+                </div>
+            </form>
+          </div>
         </div>
       </Router>
     )
