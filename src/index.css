@@ -16,3 +16,34 @@ code {
 .table {
   background: #FFF;
 }
+
+/* Missing from Boostrap CSS */
+.caret {
+  display:inline-block;
+  width:0;
+  height:0;
+  margin-left:2px;
+  vertical-align:middle;
+  border-top:4px dashed;
+  border-top:4px solid\9;
+  border-right:4px solid transparent;
+  border-left:4px solid transparent
+ }
+ .dropdown,
+ .dropup {
+  position:relative
+ }
+ .dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+ content:"";
+ border-top:0;
+ border-bottom:4px dashed;
+ border-bottom:4px solid\9
+}
+/* Caret opacity custom defaults */
+.react-bootstrap-table-sort-order .caret {
+  opacity: 1;
+}
+.order .dropdown, .order .dropup {
+  opacity: 0.4;
+}

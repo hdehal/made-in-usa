@@ -28,10 +28,17 @@ const columns = [
     dataField: 'id',
     text: 'ID',
     hidden: true
+    
   }, {
     dataField: 'company',
     text: 'Company',
-    sort: true
+    sort: true,
+    sortCaret: (order, column) => {
+      if (!order) return (<span className="order"><span className="dropdown"><span className="caret"></span></span><span className="dropup"><span className="caret"></span></span></span>);
+      else if (order === 'asc') return (<span className="react-bootstrap-table-sort-order"><span className="caret"></span></span>);
+      else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
+      return null;
+    }
 }, {
     dataField: 'url',
     text: 'URL',
