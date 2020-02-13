@@ -34,16 +34,20 @@ const columns = [
     sort: true
 }, {
     dataField: 'url',
-    text: 'URL'
+    text: 'URL',
+    sort: true
 }, {
     dataField: 'loc',
-    text: 'Location'
+    text: 'Location',
+    sort: true
 }, {
     dataField: 'gender',
-    text: 'Gender'
+    text: 'Gender',
+    sort: true
 }, {
     dataField: 'tags',
-    text: 'Tags'
+    text: 'Tags',
+    sort: true
 }];
 
 class App extends Component {
