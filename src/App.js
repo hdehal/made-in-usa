@@ -122,6 +122,12 @@ class App extends Component {
         this.setState({data})
       )
 
+      item.find().asArray()
+      .then(key => 
+        console.log(JSON.stringify(key[1]._id)) // convert BSON ID to JSON ID
+        //  this.setState({key: JSON.stringify(key[1]._id)})
+      )
+
       // Error logging
       .catch(err => {
         console.warn("Error:", err);
