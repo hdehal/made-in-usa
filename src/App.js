@@ -80,6 +80,7 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      id: [],
       data: [],
       // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
@@ -128,6 +129,7 @@ class App extends Component {
       .catch(err => console.error(`Failed to insert item: ${err}`))
 
       this.setState({
+        id: '',
         company: '',
         url: '',
         loc: '',
