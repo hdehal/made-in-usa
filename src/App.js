@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
+import Button from 'react-bootstrap/Button'
 import { Stitch, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
 
 // Define MongoDB Stitch App ID
@@ -29,6 +30,19 @@ const sortFunc = (order, column) => {
   else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
   return null;
 }
+
+// Delete functionality
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true,
+  onSelect: (row, isSelect, rowIndex, e) => {
+    console.log(row.id);
+  },
+  onSelectAll: (isSelect, rows, e) => {
+    console.log(rows.id);
+  }
+};
+const query = {};
 
 // JSON table column data
 const columns = [
@@ -78,6 +92,7 @@ class App extends Component {
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeTags = this.onChangeTags.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
       id: [],
@@ -139,7 +154,15 @@ class App extends Component {
 
       // getData after insertOne new item
       this.getData();
-    }
+        e.preventDefault();
+      }
+
+      // Delete items
+      onDelete(e) {
+        item.deleteMany(query)
+          .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
+          .catch(err => console.error(`Delete failed with error: ${err}`))
+      }
 
   getData(){
       // Find database documents
@@ -180,6 +203,7 @@ class App extends Component {
             keyField="id"
             data={this.state.data}
             columns={columns}
+            selectRow={ selectRow }
             striped
             hover
             condensed
@@ -236,6 +260,7 @@ class App extends Component {
                 </div>
                 <div className="form-group">
                     <input type="submit" value="Submit" className="btn btn-primary"/>
+                    <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
                 </div>
             </form>
           </div>
