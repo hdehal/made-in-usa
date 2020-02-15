@@ -36,6 +36,8 @@ const sortFunc = (order, column) => {
 const selectRow = {
   mode: 'checkbox',
   clickToSelect: true,
+  selectColumnPosition: 'right',
+  hideSelectAll: true,
   onSelect: (row, isSelect, rowIndex, e) => {
     console.log(row.id);
   },
