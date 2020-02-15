@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import Button from 'react-bootstrap/Button'
 import { Stitch, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
+import { ObjectId } from 'bson'
 
 // Define MongoDB Stitch App ID
 const APP_ID = "miusa-gxhmx";
@@ -42,7 +43,14 @@ const selectRow = {
     console.log(rows.id);
   }
 };
-const query = {};
+const query = {"_id": new ObjectId("5e477947109e189da07dc861")};
+
+item.find({}).toArray()
+  .then(items => {
+    console.log(`Successfully found ${items.length} documents.`)
+    items.forEach(console.log)
+    return items
+  })
 
 // JSON table column data
 const columns = [
