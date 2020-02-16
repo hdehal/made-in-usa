@@ -33,7 +33,7 @@ const sortFunc = (order, column) => {
 }
 item.find({}).toArray()
   .then(items => {
-    console.log(`Successfully found ${items.length} documents.`)
+    console.log(`Successfully found ${items.length} vendors.`)
     items.forEach(console.log)
     return items
   })
@@ -149,46 +149,47 @@ class App extends Component {
 
       // getData after insertOne new item
       this.getData();
-        e.preventDefault();
       }
 
-      // Delete items
-      onDelete(e) {
-        // const query = {"_id":"5e48e3cdaf7b8ebfc81af1eb"};
-        const query = {"_id": new ObjectId(this.state.selected)};
+    getData(){
+        // Find database documents
+        item.find({})
+        .toArray()
+        .then(data => 
+          data.map(x=>{ return { ...x, id: x._id.toString()}; })
+        ).then(data => this.setState({data}))
 
-        item.deleteMany(query)
-          .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
-          .catch(err => console.error(`Delete failed with error: ${err}`))
-      }
+        // Error logging
+        .catch(err => {
+          console.warn("Error:", err);
+        });
+    }
 
-  getData(){
-      // Find database documents
-      item.find({})
-      .toArray()
-      .then(data => 
-        data.map(x=>{ return { ...x, id: x._id.toString()}; })
-      ).then(data => this.setState({data}))
+    async componentDidMount(){
+      this.getData();
+    }
 
-      // Error logging
-      .catch(err => {
-        console.warn("Error:", err);
-      });
-  }
+    // Delete items
+    onDelete(e) {
+      const query = {"_id": new ObjectId(this.state.selected)};
 
-  async componentDidMount(){
-    this.getData();
-  }
+    item.deleteOne(query)
+      .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
+      .catch(err => console.error(`Delete failed with error: ${err}`))
+      // getData after deleting item
+      this.getData();
+    }
 
   render() {
 
 // Delete functionality
 const handleOnSelect = (row, isSelect) => {
+  // If row selected setState
   if (isSelect) {
     this.setState({
       selected: row.id
     })
-    console.log("yes")
+  // Otherwise clear the state
   } else {
     this.setState({
       selected: []
@@ -197,7 +198,7 @@ const handleOnSelect = (row, isSelect) => {
 }
 
 const selectRow = {
-  mode: 'checkbox',
+  mode: 'radio',
   clickToSelect: true,
   selectColumnPosition: 'right',
   hideSelectAll: true,
