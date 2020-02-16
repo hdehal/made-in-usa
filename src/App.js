@@ -31,22 +31,6 @@ const sortFunc = (order, column) => {
   else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
   return null;
 }
-
-// Delete functionality
-const selectRow = {
-  mode: 'checkbox',
-  clickToSelect: true,
-  selectColumnPosition: 'right',
-  hideSelectAll: true,
-  onSelect: (row, isSelect, rowIndex, e) => {
-    console.log(row.id);
-  },
-  onSelectAll: (isSelect, rows, e) => {
-    console.log(rows.id);
-  }
-};
-const query = {"_id": new ObjectId("5e477947109e189da07dc861")};
-
 item.find({}).toArray()
   .then(items => {
     console.log(`Successfully found ${items.length} documents.`)
@@ -112,7 +96,8 @@ class App extends Component {
       url: [],
       loc: [],
       gender: [],
-      tags: []
+      tags: [],
+      selected: [0, 1]
     }
   }
 
@@ -169,6 +154,9 @@ class App extends Component {
 
       // Delete items
       onDelete(e) {
+        // const query = {"_id":"5e48e3cdaf7b8ebfc81af1eb"};
+        const query = {"_id": new ObjectId(this.state.selected)};
+
         item.deleteMany(query)
           .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
           .catch(err => console.error(`Delete failed with error: ${err}`))
@@ -193,6 +181,29 @@ class App extends Component {
   }
 
   render() {
+
+// Delete functionality
+const handleOnSelect = (row, isSelect) => {
+  if (isSelect) {
+    this.setState({
+      selected: row.id
+    })
+    console.log("yes")
+  } else {
+    this.setState({
+      selected: []
+    })
+  }
+}
+
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true,
+  selectColumnPosition: 'right',
+  hideSelectAll: true,
+  onSelect: handleOnSelect
+};
+
     return(
       <Router>
         <div className="container">
