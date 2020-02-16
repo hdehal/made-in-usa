@@ -47,3 +47,11 @@ code {
 .order .dropdown, .order .dropup {
   opacity: 0.4;
 }
+/* Extra button styling */
+.form-group .btn {
+  margin-right: 0.5em;
+}
+/* Single radio button styling for delete functionality */
+.selection-cell input[type="radio"] {
+  width: 100%;
+}

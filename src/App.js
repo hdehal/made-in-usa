@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
+import Button from 'react-bootstrap/Button'
 import { Stitch, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
+import { ObjectId } from 'bson'
 
 // Define MongoDB Stitch App ID
 const APP_ID = "miusa-gxhmx";
@@ -29,6 +31,12 @@ const sortFunc = (order, column) => {
   else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
   return null;
 }
+item.find({}).toArray()
+  .then(items => {
+    console.log(`Successfully found ${items.length} vendors.`)
+    items.forEach(console.log)
+    return items
+  })
 
 // JSON table column data
 const columns = [
@@ -78,15 +86,18 @@ class App extends Component {
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeTags = this.onChangeTags.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
+      id: [],
       data: [],
       // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
       url: [],
       loc: [],
       gender: [],
-      tags: []
+      tags: [],
+      selected: [0, 1]
     }
   }
 
@@ -128,6 +139,7 @@ class App extends Component {
       .catch(err => console.error(`Failed to insert item: ${err}`))
 
       this.setState({
+        id: '',
         company: '',
         url: '',
         loc: '',
@@ -137,27 +149,62 @@ class App extends Component {
 
       // getData after insertOne new item
       this.getData();
+      }
+
+    getData(){
+        // Find database documents
+        item.find({})
+        .toArray()
+        .then(data => 
+          data.map(x=>{ return { ...x, id: x._id.toString()}; })
+        ).then(data => this.setState({data}))
+
+        // Error logging
+        .catch(err => {
+          console.warn("Error:", err);
+        });
     }
 
-  getData(){
-      // Find database documents
-      item.find({})
-      .toArray()
-      .then(data => 
-        data.map(x=>{ return { ...x, id: x._id.toString()}; })
-      ).then(data => this.setState({data}))
+    async componentDidMount(){
+      this.getData();
+    }
 
-      // Error logging
-      .catch(err => {
-        console.warn("Error:", err);
-      });
-  }
+    // Delete items
+    onDelete(e) {
+      const query = {"_id": new ObjectId(this.state.selected)};
 
-  async componentDidMount(){
-    this.getData();
-  }
+    item.deleteOne(query)
+      .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
+      .catch(err => console.error(`Delete failed with error: ${err}`))
+      // getData after deleting item
+      this.getData();
+    }
 
   render() {
+
+// Delete functionality
+const handleOnSelect = (row, isSelect) => {
+  // If row selected setState
+  if (isSelect) {
+    this.setState({
+      selected: row.id
+    })
+  // Otherwise clear the state
+  } else {
+    this.setState({
+      selected: []
+    })
+  }
+}
+
+const selectRow = {
+  mode: 'radio',
+  clickToSelect: true,
+  selectColumnPosition: 'right',
+  hideSelectAll: true,
+  onSelect: handleOnSelect
+};
+
     return(
       <Router>
         <div className="container">
@@ -178,6 +225,7 @@ class App extends Component {
             keyField="id"
             data={this.state.data}
             columns={columns}
+            selectRow={ selectRow }
             striped
             hover
             condensed
@@ -234,6 +282,7 @@ class App extends Component {
                 </div>
                 <div className="form-group">
                     <input type="submit" value="Submit" className="btn btn-primary"/>
+                    <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
                 </div>
             </form>
           </div>
