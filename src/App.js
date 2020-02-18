@@ -4,75 +4,11 @@ import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import Button from 'react-bootstrap/Button'
-import { Stitch, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
 import { ObjectId } from 'bson'
 
-// Define MongoDB Stitch App ID
-const APP_ID = "miusa-gxhmx";
-
-// Initialize MongoDB Stitch
-const app = Stitch.hasAppClient(APP_ID)
-  ? Stitch.getAppClient(APP_ID)
-  : Stitch.initializeAppClient(APP_ID);
-
-// Define client/factory
-const mongoClient = app.getServiceClient(
-    RemoteMongoClient.factory,
-    "mongodb-atlas"
-  );  
-
-// Define db and collection
-const item = mongoClient.db("vendor").collection("vendor-item");
-
-// Define sortCaret
-const sortFunc = (order, column) => {
-  if (!order) return (<span className="order"><span className="dropdown"><span className="caret"></span></span><span className="dropup"><span className="caret"></span></span></span>);
-  else if (order === 'asc') return (<span className="react-bootstrap-table-sort-order"><span className="caret"></span></span>);
-  else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
-  return null;
-}
-item.find({}).toArray()
-  .then(items => {
-    console.log(`Successfully found ${items.length} vendors.`)
-    items.forEach(console.log)
-    return items
-  })
-
-// JSON table column data
-const columns = [
-  {
-    dataField: 'id',
-    text: 'ID',
-    hidden: true
-    
-  }, {
-    dataField: 'company',
-    text: 'Company',
-    sort: true,
-    sortCaret: sortFunc
-}, {
-    dataField: 'url',
-    text: 'URL',
-    sort: true,
-    sortCaret: sortFunc,
-    formatter: (rowContent, row) => {
-      return <><a href={rowContent} target="_blank" rel="noopener noreferrer">{rowContent}</a></>;
-    }
-}, {
-    dataField: 'loc',
-    text: 'Location',
-    sort: true,
-    sortCaret: sortFunc
-}, {
-    dataField: 'gender',
-    text: 'Gender',
-    sort: true,
-    sortCaret: sortFunc
-}, {
-    dataField: 'tags',
-    text: 'Tags',
-    sort: true
-}];
+// Modularized imports
+import { item } from './components/stitchAuth'
+import {tableColumns} from './components/tableColumns'
 
 class App extends Component {
 
@@ -224,7 +160,7 @@ const selectRow = {
           <BootstrapTable
             keyField="id"
             data={this.state.data}
-            columns={columns}
+            columns={tableColumns}
             selectRow={ selectRow }
             striped
             hover
