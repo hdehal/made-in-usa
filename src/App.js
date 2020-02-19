@@ -219,13 +219,12 @@ class App extends Component {
                     <label>Gender:</label>
                     <select
                       className="form-control dropdown-toggle btn btn-secondary"
-                      value={this.state.gender}
                       onChange={this.onChangeGender}
+                      multiple={false}
                       >
-                      <option></option>
-                      <option>Everyone</option>
-                      <option>Male</option>
-                      <option>Female</option>
+                      <option value="Everyone">Everyone</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                     </select>
                 </Form.Group>
 
