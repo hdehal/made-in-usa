@@ -85,12 +85,14 @@ class App extends Component {
       .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
       .catch(err => console.error(`Failed to insert item: ${err}`))
 
+      // Clear the forms
       this.setState({
         id: '',
         company: '',
         url: '',
         loc: '',
         gender: '',
+        checkboxIds: []
       })
 
       // getData after insertOne new item
