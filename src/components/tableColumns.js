@@ -50,10 +50,11 @@ export const tableColumns = [
     filter: textFilter({
         delay: 1000, // default is 500ms
         style: {
-            backgroundColor: 'yellow'
+
         },
-        className: 'test-classname',
-        placeholder: 'Custom PlaceHolder',
-        onClick: e => console.log(e)
-    })
+        className: 'form-control-sm',
+        placeholder: 'Search by tag',
+        // onClick: e => console.log(e)
+    }),
+    sortCaret: sortFunc
 }];
