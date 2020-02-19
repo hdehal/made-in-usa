@@ -4,6 +4,8 @@ import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import { Row, Col } from 'react-bootstrap';
 import { ObjectId } from 'bson'
 
 // Modularized imports
@@ -46,7 +48,7 @@ class App extends Component {
     }
   }
 
-  // Form fields onchange
+  // Form fields onChange
   onChangeCompanyName(e) {
     this.setState({
         company: e.target.value
@@ -73,7 +75,7 @@ class App extends Component {
     });
     }
 
-    // Checkboxes
+    // Checkboxes onChange
     onChangeAccessories = () => {
       this.setState(initialState => ({
         isAccessories: !initialState.isAccessories,
@@ -117,9 +119,22 @@ class App extends Component {
   
     onSubmit(e) {
       e.preventDefault();
-      // console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.tags}`)
 
-      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.tags }
+      // Checkboxes convert value of a checkbox to string
+      let checkArray = [];
+      for (var key in this.state) {
+        if (this.state[key] === true) {
+          checkArray.push(key);
+        }
+      }
+  
+      let checkData = {
+        checkbox: checkArray.toString()
+      };
+  
+
+      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.checkData }
+      console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.checkData}`)
 
       // Insert new item
       item.insertOne(newItem)
@@ -224,7 +239,7 @@ const selectRow = {
             <h3>Add New Company</h3>
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                    <label>Company Name:  </label>
+                    <label>Company Name:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -233,7 +248,7 @@ const selectRow = {
                     />
                 </div>
                 <div className="form-group">
-                    <label>URL: </label>
+                    <label>URL:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -242,7 +257,7 @@ const selectRow = {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Location: </label>
+                    <label>Location:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -251,7 +266,7 @@ const selectRow = {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Gender: </label>
+                    <label>Gender:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -259,15 +274,79 @@ const selectRow = {
                         onChange={this.onChangeGender}
                     />
                 </div>
+                {/*
                 <div className="form-group">
-                    <label>Category/Tags: </label>
+                    <label>Category/Tags:</label>
+                    <label>Test
                     <input 
-                        type="text" 
+                        type="checkbox" 
                         className="form-control"
                         value={this.state.tags}
                         onChange={this.onChangeTags}
-                    />
+                    /></label>
                 </div>
+                */}
+
+<fieldset>
+    <Form.Group as={Row}>
+      <Form.Label as="legend" column sm={2}>
+        Category/Tags:
+      </Form.Label>
+      <Col lg={2}>
+        <Form.Check
+          type="checkbox"
+          label="Accessories"
+          checked={this.state.Accessories}
+          onChange={this.onChangeAccessories}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Dresses"
+          checked={this.state.isDresses}
+          onChange={this.onChangeDresses}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Pants"
+          checked={this.state.isPants}
+          onChange={this.onChangePants}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Shirts"
+          checked={this.state.isShirts}
+          onChange={this.onChangeShirts}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Shoes"
+          checked={this.state.isShoes}
+          onChange={this.onChangeShoes}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Suits"
+          checked={this.state.isSuits}
+          onChange={this.onChangeSuits}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Swim"
+          checked={this.state.isSwim}
+          onChange={this.onChangeSwim}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Undergarments"
+          checked={this.state.isUndergarments}
+          onChange={this.onChangeUndergarments}
+        />
+      </Col>
+    </Form.Group>
+  </fieldset>
+
+
+
                 <div className="form-group">
                     <input type="submit" value="Submit" className="btn btn-primary"/>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
