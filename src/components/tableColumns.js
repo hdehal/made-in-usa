@@ -1,4 +1,5 @@
 import React from 'react';
+import { textFilter } from 'react-bootstrap-table2-filter';
 import Badge from 'react-bootstrap/Badge'
 
 // Define sortCaret
@@ -42,12 +43,17 @@ export const tableColumns = [
     text: 'Tags',
     sort: true,
     formatter: (cell) => {
-        if (cell.length === 1) {
-            return cell;
-          } else {
             return cell.map(x => {
                 return <><Badge pill variant="primary">{x}</Badge></>;
             });
-          }
-      }
+      },
+    filter: textFilter({
+        delay: 1000, // default is 500ms
+        style: {
+            backgroundColor: 'yellow'
+        },
+        className: 'test-classname',
+        placeholder: 'Custom PlaceHolder',
+        onClick: e => console.log(e)
+    })
 }];
