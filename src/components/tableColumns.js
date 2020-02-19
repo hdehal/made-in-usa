@@ -46,7 +46,7 @@ export const tableColumns = [
             return cell;
           } else {
             return cell.map(x => {
-                return <><Badge variant="primary">{x}</Badge></>;
+                return <><Badge pill variant="primary">{x}</Badge></>;
             });
           }
       }

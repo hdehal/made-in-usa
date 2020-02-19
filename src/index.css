@@ -55,3 +55,7 @@ code {
 .selection-cell input[type="radio"] {
   width: 100%;
 }
+/* Badge pill variant spacing */
+.badge.badge-pill.badge-primary {
+  margin-right: 0.25em;
+}
