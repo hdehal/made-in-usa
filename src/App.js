@@ -22,7 +22,6 @@ class App extends Component {
     this.onChangeUrl = this.onChangeUrl.bind(this);
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
-    this.onChangeTags = this.onChangeTags.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
 
@@ -30,21 +29,13 @@ class App extends Component {
       id: [],
       data: [],
       // States for checkboxes
-      isAccessories: false,
-      isDresses: false,
-      isPants: false,
-      isShirts: false,
-      isShoes: false,
-      isSuits: false,
-      isSwim: false,
-      isUndergarments: false,
+      checkboxes: [{ id: "Accessories" }, { id: "Dresses" }, { id: "Pants" }, { id: "Shirts" }, { id: "Shoes" }, { id: "Suits" }, { id: "Swim" }, { id: "Undergarments" }],
+      checkboxIds: [],
       // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
       url: [],
       loc: [],
-      gender: [],
-      tags: [],
-      selected: [0, 1]
+      gender: []
     }
   }
 
@@ -69,72 +60,25 @@ class App extends Component {
         gender: e.target.value
     });
     }
-    onChangeTags(e) {
-      this.setState({
-        tags: e.target.value
-    });
-    }
 
     // Checkboxes onChange
-    onChangeAccessories = () => {
-      this.setState(initialState => ({
-        isAccessories: !initialState.isAccessories,
-      }));
-    }
-    onChangeDresses = () => {
-    this.setState(initialState => ({
-        isDresses: !initialState.isDresses,
-      }));
-    }
-    onChangePants = () => {
-    this.setState(initialState => ({
-        isPants: !initialState.isPants,
-      }));
-    }
-    onChangeShirts = () => {
-    this.setState(initialState => ({
-        isShirts: !initialState.isShirts,
-      }));
-    }
-    onChangeShoes = () => {
-    this.setState(initialState => ({
-        isShoes: !initialState.isShoes,
-      }));
-    }
-    onChangeSuits = () => {
-    this.setState(initialState => ({
-        isSuits: !initialState.isSuits,
-      }));
-    }
-    onChangeSwim = () => {
-    this.setState(initialState => ({
-        isSwim: !initialState.isSwim,
-      }));
-    }
-    onChangeUndergarments = () => {
-    this.setState(initialState => ({
-        isUndergarments: !initialState.isUndergarments,
-      }));
-    }
-  
+    checkboxOnChange = event => {
+      const { name } = event.target;
+      this.setState(prevState => {
+        const { checkboxIds } = prevState;
+        if (checkboxIds.includes(name)) {
+          return { checkboxIds: checkboxIds.filter(id => id !== name) };
+        } else {
+          return { checkboxIds: [...checkboxIds, name] };
+        }
+      });
+    };
+
     onSubmit(e) {
       e.preventDefault();
 
-      // Checkboxes convert value of a checkbox to string
-      let checkArray = [];
-      for (var key in this.state) {
-        if (this.state[key] === true) {
-          checkArray.push(key);
-        }
-      }
-  
-      let checkData = {
-        checkbox: checkArray.toString()
-      };
-  
-
-      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.checkData }
-      console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.checkData}`)
+      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.checkboxIds }
+      console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.checkboxIds}`)
 
       // Insert new item
       item.insertOne(newItem)
@@ -147,7 +91,6 @@ class App extends Component {
         url: '',
         loc: '',
         gender: '',
-        tags: ''
       })
 
       // getData after insertOne new item
@@ -185,28 +128,32 @@ class App extends Component {
 
   render() {
 
-// Delete functionality
-const handleOnSelect = (row, isSelect) => {
-  // If row selected setState
-  if (isSelect) {
-    this.setState({
-      selected: row.id
-    })
-  // Otherwise clear the state
-  } else {
-    this.setState({
-      selected: []
-    })
-  }
-}
+    // Define checkboxes state
+    const { checkboxes, checkboxIds } = this.state;
 
-const selectRow = {
-  mode: 'radio',
-  clickToSelect: true,
-  selectColumnPosition: 'right',
-  hideSelectAll: true,
-  onSelect: handleOnSelect
-};
+    // Delete functionality
+    const handleOnSelect = (row, isSelect) => {
+      // If row selected setState
+      if (isSelect) {
+        this.setState({
+          selected: row.id
+        })
+      // Otherwise clear the state
+      } else {
+        this.setState({
+          selected: []
+        })
+      }
+    }
+
+    // Define selectRow
+    const selectRow = {
+      mode: 'radio',
+      clickToSelect: true,
+      selectColumnPosition: 'right',
+      hideSelectAll: true,
+      onSelect: handleOnSelect
+    };
 
     return(
       <Router>
@@ -274,78 +221,28 @@ const selectRow = {
                         onChange={this.onChangeGender}
                     />
                 </div>
-                {/*
+
                 <div className="form-group">
-                    <label>Category/Tags:</label>
-                    <label>Test
-                    <input 
-                        type="checkbox" 
-                        className="form-control"
-                        value={this.state.tags}
-                        onChange={this.onChangeTags}
-                    /></label>
-                </div>
-                */}
-
-<fieldset>
-    <Form.Group as={Row}>
-      <Form.Label as="legend" column sm={2}>
-        Category/Tags:
-      </Form.Label>
-      <Col lg={2}>
-        <Form.Check
-          type="checkbox"
-          label="Accessories"
-          checked={this.state.Accessories}
-          onChange={this.onChangeAccessories}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Dresses"
-          checked={this.state.isDresses}
-          onChange={this.onChangeDresses}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Pants"
-          checked={this.state.isPants}
-          onChange={this.onChangePants}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Shirts"
-          checked={this.state.isShirts}
-          onChange={this.onChangeShirts}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Shoes"
-          checked={this.state.isShoes}
-          onChange={this.onChangeShoes}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Suits"
-          checked={this.state.isSuits}
-          onChange={this.onChangeSuits}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Swim"
-          checked={this.state.isSwim}
-          onChange={this.onChangeSwim}
-        />
-        <Form.Check
-          type="checkbox"
-          label="Undergarments"
-          checked={this.state.isUndergarments}
-          onChange={this.onChangeUndergarments}
-        />
-      </Col>
-    </Form.Group>
-  </fieldset>
-
-
+                  <fieldset>
+                      <Form.Group as={Row}>
+                        <Form.Label as="legend" column sm={2}>
+                          Category/Tags:
+                        </Form.Label>
+                        <Col lg={2}>
+                          {checkboxes.map(checkbox => (
+                            <Form.Check
+                              key={checkbox.id}
+                              label={checkbox.id}
+                              type="checkbox"
+                              checked={checkboxIds.includes(checkbox.id)}
+                              name={checkbox.id}
+                              onChange={this.checkboxOnChange}
+                            />
+                          ))}
+                        </Col>
+                      </Form.Group>
+                    </fieldset>
+                  </div>
 
                 <div className="form-group">
                     <input type="submit" value="Submit" className="btn btn-primary"/>
