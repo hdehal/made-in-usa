@@ -27,6 +27,15 @@ class App extends Component {
     this.state = {
       id: [],
       data: [],
+      // States for checkboxes
+      isAccessories: false,
+      isDresses: false,
+      isPants: false,
+      isShirts: false,
+      isShoes: false,
+      isSuits: false,
+      isSwim: false,
+      isUndergarments: false,
       // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
       url: [],
@@ -37,6 +46,7 @@ class App extends Component {
     }
   }
 
+  // Form fields onchange
   onChangeCompanyName(e) {
     this.setState({
         company: e.target.value
@@ -61,6 +71,48 @@ class App extends Component {
       this.setState({
         tags: e.target.value
     });
+    }
+
+    // Checkboxes
+    onChangeAccessories = () => {
+      this.setState(initialState => ({
+        isAccessories: !initialState.isAccessories,
+      }));
+    }
+    onChangeDresses = () => {
+    this.setState(initialState => ({
+        isDresses: !initialState.isDresses,
+      }));
+    }
+    onChangePants = () => {
+    this.setState(initialState => ({
+        isPants: !initialState.isPants,
+      }));
+    }
+    onChangeShirts = () => {
+    this.setState(initialState => ({
+        isShirts: !initialState.isShirts,
+      }));
+    }
+    onChangeShoes = () => {
+    this.setState(initialState => ({
+        isShoes: !initialState.isShoes,
+      }));
+    }
+    onChangeSuits = () => {
+    this.setState(initialState => ({
+        isSuits: !initialState.isSuits,
+      }));
+    }
+    onChangeSwim = () => {
+    this.setState(initialState => ({
+        isSwim: !initialState.isSwim,
+      }));
+    }
+    onChangeUndergarments = () => {
+    this.setState(initialState => ({
+        isUndergarments: !initialState.isUndergarments,
+      }));
     }
   
     onSubmit(e) {
