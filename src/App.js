@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Row, Col } from 'react-bootstrap';
