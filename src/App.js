@@ -186,74 +186,68 @@ class App extends Component {
             bootstrap4
           />
 
-          <div>
-            <h3>Add New Company</h3>
+            <h4>Add New Company</h4>
             <form onSubmit={this.onSubmit}>
-                <div className="form-group">
+                <Form.Group>
                     <label>Company Name:</label>
-                    <input 
-                        type="text" 
-                        className="form-control"
+                    <Form.Control 
+                        type="text"
+                        size="sm"
                         value={this.state.company}
                         onChange={this.onChangeCompanyName}
                     />
-                </div>
-                <div className="form-group">
+                </Form.Group>
+                <Form.Group>
                     <label>URL:</label>
-                    <input 
-                        type="text" 
-                        className="form-control"
+                    <Form.Control 
+                        type="text"
+                        size="sm"
                         value={this.state.url}
                         onChange={this.onChangeUrl}
                     />
-                </div>
-                <div className="form-group">
+                </Form.Group>
+                <Form.Group>
                     <label>Location:</label>
-                    <input 
-                        type="text" 
-                        className="form-control"
+                    <Form.Control 
+                        type="text"
+                        size="sm"
                         value={this.state.loc}
                         onChange={this.onChangeLoc}
                     />
-                </div>
-                <div className="form-group">
+                </Form.Group>
+                <Form.Group>
                     <label>Gender:</label>
-                    <input 
-                        type="text" 
-                        className="form-control"
+                    <Form.Control 
+                        type="text"
+                        size="sm"
                         value={this.state.gender}
                         onChange={this.onChangeGender}
                     />
-                </div>
+                </Form.Group>
 
-                <div className="form-group">
-                  <fieldset>
-                      <Form.Group as={Row}>
-                        <Form.Label as="legend" column sm={2}>
-                          Category/Tags:
-                        </Form.Label>
-                        <Col lg={2}>
-                          {checkboxes.map(checkbox => (
-                            <Form.Check
-                              key={checkbox.id}
-                              label={checkbox.id}
-                              type="checkbox"
-                              checked={checkboxIds.includes(checkbox.id)}
-                              name={checkbox.id}
-                              onChange={this.checkboxOnChange}
-                            />
-                          ))}
-                        </Col>
-                      </Form.Group>
-                    </fieldset>
-                  </div>
+                <Form.Group as={Row}>
+                  <Form.Label as="legend" column sm={2}>
+                    Category/Tags:
+                  </Form.Label>
+                  <Col lg={2}>
+                    {checkboxes.map(checkbox => (
+                      <Form.Check
+                        key={checkbox.id}
+                        label={checkbox.id}
+                        type="checkbox"
+                        checked={checkboxIds.includes(checkbox.id)}
+                        name={checkbox.id}
+                        onChange={this.checkboxOnChange}
+                      />
+                    ))}
+                  </Col>
+                </Form.Group>
 
-                <div className="form-group">
-                    <input type="submit" value="Submit" className="btn btn-primary"/>
+                <Form.Group>
+                    <Button type="submit" value="Submit">Submit</Button>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
-                </div>
+                </Form.Group>
             </form>
-          </div>
         </div>
       </Router>
     )
