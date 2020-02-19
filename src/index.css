@@ -70,3 +70,8 @@ code {
   background-color: #EEE;
   margin-left: 0.5em;
 }
+/* Dropdown styling */
+.form-control.dropdown-toggle.btn.btn-secondary {
+  width: max-content;
+  margin-left: 0.5em;
+}
