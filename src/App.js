@@ -69,7 +69,7 @@ class App extends Component {
         if (checkboxIds.includes(name)) {
           return { checkboxIds: checkboxIds.filter(id => id !== name) };
         } else {
-          return { checkboxIds: [...checkboxIds, name] };
+          return { checkboxIds: [...checkboxIds, name].sort() };
         }
       });
     };
