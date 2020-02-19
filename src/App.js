@@ -3,7 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory from 'react-bootstrap-table2-filter';
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import { Row, Col } from 'react-bootstrap';
 import { ObjectId } from 'bson'
 
 // Modularized imports
@@ -20,23 +23,24 @@ class App extends Component {
     this.onChangeUrl = this.onChangeUrl.bind(this);
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
-    this.onChangeTags = this.onChangeTags.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
 
     this.state = {
       id: [],
       data: [],
+      // States for checkboxes
+      checkboxes: [{ id: "Accessories" }, { id: "Dresses" }, { id: "Pants" }, { id: "Shirts" }, { id: "Shoes" }, { id: "Suits" }, { id: "Swim" }, { id: "Undergarments" }],
+      checkboxIds: [],
       // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
       url: [],
       loc: [],
-      gender: [],
-      tags: [],
-      selected: [0, 1]
+      gender: []
     }
   }
 
+  // Form fields onChange
   onChangeCompanyName(e) {
     this.setState({
         company: e.target.value
@@ -57,30 +61,39 @@ class App extends Component {
         gender: e.target.value
     });
     }
-    onChangeTags(e) {
-      this.setState({
-        tags: e.target.value
-    });
-    }
-  
+
+    // Checkboxes onChange
+    checkboxOnChange = event => {
+      const { name } = event.target;
+      this.setState(prevState => {
+        const { checkboxIds } = prevState;
+        if (checkboxIds.includes(name)) {
+          return { checkboxIds: checkboxIds.filter(id => id !== name) };
+        } else {
+          return { checkboxIds: [...checkboxIds, name].sort() };
+        }
+      });
+    };
+
     onSubmit(e) {
       e.preventDefault();
-      // console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.tags}`)
 
-      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.tags }
+      var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.checkboxIds }
+      console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.checkboxIds}`)
 
       // Insert new item
       item.insertOne(newItem)
       .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
       .catch(err => console.error(`Failed to insert item: ${err}`))
 
+      // Clear the forms
       this.setState({
         id: '',
         company: '',
         url: '',
         loc: '',
         gender: '',
-        tags: ''
+        checkboxIds: []
       })
 
       // getData after insertOne new item
@@ -118,28 +131,32 @@ class App extends Component {
 
   render() {
 
-// Delete functionality
-const handleOnSelect = (row, isSelect) => {
-  // If row selected setState
-  if (isSelect) {
-    this.setState({
-      selected: row.id
-    })
-  // Otherwise clear the state
-  } else {
-    this.setState({
-      selected: []
-    })
-  }
-}
+    // Define checkboxes state
+    const { checkboxes, checkboxIds } = this.state;
 
-const selectRow = {
-  mode: 'radio',
-  clickToSelect: true,
-  selectColumnPosition: 'right',
-  hideSelectAll: true,
-  onSelect: handleOnSelect
-};
+    // Delete functionality
+    const handleOnSelect = (row, isSelect) => {
+      // If row selected setState
+      if (isSelect) {
+        this.setState({
+          selected: row.id
+        })
+      // Otherwise clear the state
+      } else {
+        this.setState({
+          selected: []
+        })
+      }
+    }
+
+    // Define selectRow
+    const selectRow = {
+      mode: 'radio',
+      clickToSelect: true,
+      selectColumnPosition: 'right',
+      hideSelectAll: true,
+      onSelect: handleOnSelect
+    };
 
     return(
       <Router>
@@ -162,6 +179,7 @@ const selectRow = {
             data={this.state.data}
             columns={tableColumns}
             selectRow={ selectRow }
+            filter={ filterFactory() }
             striped
             hover
             condensed
@@ -172,7 +190,7 @@ const selectRow = {
             <h3>Add New Company</h3>
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                    <label>Company Name:  </label>
+                    <label>Company Name:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -181,7 +199,7 @@ const selectRow = {
                     />
                 </div>
                 <div className="form-group">
-                    <label>URL: </label>
+                    <label>URL:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -190,7 +208,7 @@ const selectRow = {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Location: </label>
+                    <label>Location:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -199,7 +217,7 @@ const selectRow = {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Gender: </label>
+                    <label>Gender:</label>
                     <input 
                         type="text" 
                         className="form-control"
@@ -207,15 +225,29 @@ const selectRow = {
                         onChange={this.onChangeGender}
                     />
                 </div>
+
                 <div className="form-group">
-                    <label>Category/Tags: </label>
-                    <input 
-                        type="text" 
-                        className="form-control"
-                        value={this.state.tags}
-                        onChange={this.onChangeTags}
-                    />
-                </div>
+                  <fieldset>
+                      <Form.Group as={Row}>
+                        <Form.Label as="legend" column sm={2}>
+                          Category/Tags:
+                        </Form.Label>
+                        <Col lg={2}>
+                          {checkboxes.map(checkbox => (
+                            <Form.Check
+                              key={checkbox.id}
+                              label={checkbox.id}
+                              type="checkbox"
+                              checked={checkboxIds.includes(checkbox.id)}
+                              name={checkbox.id}
+                              onChange={this.checkboxOnChange}
+                            />
+                          ))}
+                        </Col>
+                      </Form.Group>
+                    </fieldset>
+                  </div>
+
                 <div className="form-group">
                     <input type="submit" value="Submit" className="btn btn-primary"/>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>

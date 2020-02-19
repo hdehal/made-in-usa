@@ -55,3 +55,18 @@ code {
 .selection-cell input[type="radio"] {
   width: 100%;
 }
+/* Badge pill variant spacing */
+.badge.badge-pill.badge-primary {
+  margin-right: 0.25em;
+}
+/* Table column headers */
+.sortable {
+  vertical-align: middle !important;
+}
+.filter-label {
+  margin-bottom: 0px !important;
+}
+#text-filter-column-Tags {
+  background-color: #EEE;
+  margin-left: 0.5em;
+}
