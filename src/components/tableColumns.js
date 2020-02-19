@@ -1,4 +1,5 @@
 import React from 'react';
+import Badge from 'react-bootstrap/Badge'
 
 // Define sortCaret
 export const sortFunc = (order, column) => {
@@ -39,5 +40,14 @@ export const tableColumns = [
 }, {
     dataField: 'tags',
     text: 'Tags',
-    sort: true
+    sort: true,
+    formatter: (cell) => {
+        if (cell.length === 1) {
+            return cell;
+          } else {
+            return cell.map(x => {
+                return <><Badge variant="primary">{x}</Badge></>;
+            });
+          }
+      }
 }];
