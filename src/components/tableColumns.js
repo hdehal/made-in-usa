@@ -9,8 +9,10 @@ export const sortFunc = (order, column) => {
     else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
     return null;
   }
-  
+
 // JSON table column data
+let nameFilter;
+
 export const tableColumns = [
 {
     dataField: 'id',
@@ -42,19 +44,32 @@ export const tableColumns = [
     dataField: 'tags',
     text: 'Tags',
     sort: true,
+    sortCaret: sortFunc,
     formatter: (cell) => {
             return cell.map(x => {
                 return <><Badge pill variant="primary">{x}</Badge></>;
             });
       },
     filter: textFilter({
-        delay: 1000, // default is 500ms
-        style: {
-
-        },
         className: 'form-control-sm',
         placeholder: 'Search by tag',
         // onClick: e => console.log(e)
-    }),
-    sortCaret: sortFunc
+        getFilter: (filter) => {
+          nameFilter = filter;
+        }
+      }),
 }];
+
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        var isEscape = false;
+        if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc");
+        } else {
+            isEscape = (evt.keyCode === 27);
+        }
+        if (isEscape) {
+            // console.log("Escape key pressed")
+            nameFilter('');
+        }
+    };
