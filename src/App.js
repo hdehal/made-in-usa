@@ -11,7 +11,8 @@ import { ObjectId } from 'bson'
 
 // Modularized imports
 import { item } from './components/stitchAuth'
-import {tableColumns} from './components/tableColumns'
+import { tableColumns } from './components/tableColumns'
+import { AddForm } from './components/addForm'
 
 class App extends Component {
 
