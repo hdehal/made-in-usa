@@ -2,68 +2,14 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
-import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory from 'react-bootstrap-table2-filter';
 
-// Modularized imports
-import { item } from './components/stitchAuth'
-import { tableColumns } from './components/tableColumns'
+// Modularized component imports
 import AddForm from './components/addForm'
+import DisplayTable from './components/displayTable'
 
 class App extends Component {
 
-    // Initial state
-    constructor(props){
-      super(props);
-
-      this.state = {
-        data: []
-      }
-    }
-
-    getData(){
-        // Find database documents
-        item.find({})
-        .toArray()
-        .then(data => 
-          data.map(x=>{ return { ...x, id: x._id.toString()}; })
-        ).then(data => this.setState({data}))
-
-        // Error logging
-        .catch(err => {
-          console.warn("Error:", err);
-        });
-    }
-
-    async componentDidMount(){
-      this.getData();
-    }
-
   render() {
-
-    // Delete functionality
-    const handleOnSelect = (row, isSelect) => {
-      // If row selected setState
-      if (isSelect) {
-        this.setState({
-          selected: row.id
-        })
-      // Otherwise clear the state
-      } else {
-        this.setState({
-          selected: []
-        })
-      }
-    }
-
-    // Define selectRow
-    const selectRow = {
-      mode: 'radio',
-      clickToSelect: true,
-      selectColumnPosition: 'right',
-      hideSelectAll: true,
-      onSelect: handleOnSelect
-    };
 
     return(
       <Router>
@@ -82,17 +28,7 @@ class App extends Component {
           <Switch>
           </Switch>
 
-          <BootstrapTable
-            keyField="id"
-            data={this.state.data}
-            columns={tableColumns}
-            selectRow={ selectRow }
-            filter={ filterFactory() }
-            striped
-            hover
-            condensed
-            bootstrap4
-          />
+          <DisplayTable />
 
           <AddForm />
 
