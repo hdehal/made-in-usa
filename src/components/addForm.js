@@ -91,7 +91,7 @@ class AddForm extends Component {
         })
 
         // getData after insertOne new item
-        this.getData();
+        // this.getData();
         }
 
     // Delete items
@@ -102,7 +102,7 @@ class AddForm extends Component {
         .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
         .catch(err => console.error(`Delete failed with error: ${err}`))
         // getData after deleting item
-        this.getData();
+        // this.getData();
     }
 
   render() {
@@ -148,6 +148,7 @@ class AddForm extends Component {
                       onChange={this.onChangeGender}
                       multiple={false}
                       >
+                      <option value="">Select One</option>
                       <option value="Everyone">Everyone</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
