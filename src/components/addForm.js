@@ -34,23 +34,6 @@ class AddForm extends Component {
       gender: []
     }
   }
-  
-  // Delete functionality
-  handleOnSelect(row, isSelect){
-    // If row selected setState
-    if (isSelect) {
-      console.log(row)
-      this.setState({
-        selected: row.id
-      })
-    // Otherwise clear the state
-    } else {
-      console.log(row)
-      this.setState({
-        selected: []
-      })
-    }
-  }
 
   // Delete items
   onDelete(e) {
