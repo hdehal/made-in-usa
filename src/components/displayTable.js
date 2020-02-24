@@ -5,6 +5,7 @@ import filterFactory from 'react-bootstrap-table2-filter';
 // Modularized component imports
 import { item } from './stitchAuth'
 import { tableColumns } from './tableColumns'
+import { handleOnSelect } from './deleteData'
 
 class DisplayTable extends Component {
 
@@ -36,21 +37,6 @@ class DisplayTable extends Component {
       }
 
   render() {
-
-    // Delete functionality
-    const handleOnSelect = (row, isSelect) => {
-        // If row selected setState
-        if (isSelect) {
-          this.setState({
-            selected: row.id
-          })
-        // Otherwise clear the state
-        } else {
-          this.setState({
-            selected: []
-          })
-        }
-      }
   
       // Define selectRow
       const selectRow = {
