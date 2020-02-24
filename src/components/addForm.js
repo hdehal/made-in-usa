@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 // Modularized component imports
 import { item } from './stitchAuth'
+import { ObjectId } from 'bson'
 
 class AddForm extends Component {
 
@@ -17,10 +18,12 @@ class AddForm extends Component {
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
       id: [],
       data: [],
+      selected: [],
       // States for checkboxes
       checkboxes: [{ id: "Accessories" }, { id: "Dresses" }, { id: "Pants" }, { id: "Shirts" }, { id: "Shoes" }, { id: "Suits" }, { id: "Swim" }, { id: "Undergarments" }],
       checkboxIds: [],
@@ -31,6 +34,35 @@ class AddForm extends Component {
       gender: []
     }
   }
+  
+  // Delete functionality
+  handleOnSelect(row, isSelect){
+    // If row selected setState
+    if (isSelect) {
+      console.log(row)
+      this.setState({
+        selected: row.id
+      })
+    // Otherwise clear the state
+    } else {
+      console.log(row)
+      this.setState({
+        selected: []
+      })
+    }
+  }
+
+  // Delete items
+  onDelete(e) {
+    console.log(this.state.selected)
+    const query = {"_id": new ObjectId(this.state.selected)};
+
+    item.deleteOne(query)
+        .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
+        .catch(err => console.error(`Delete failed with error: ${err}`))
+        // getData after deleting item
+        // this.getData();
+    }
 
   // Form fields onChange
   onChangeCompanyName(e) {
@@ -170,4 +202,6 @@ class AddForm extends Component {
   }
 }
 
+
+  
 export default AddForm;

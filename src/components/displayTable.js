@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory from 'react-bootstrap-table2-filter';
-import { ObjectId } from 'bson'
 
 // Modularized component imports
 import { item } from './stitchAuth'
@@ -13,7 +12,7 @@ class DisplayTable extends Component {
     constructor(props){
         super(props);
 
-        this.onDelete = this.onDelete.bind(this);
+        // this.onDelete = this.onDelete.bind(this);
 
         this.state = {
           data: [],
@@ -39,43 +38,17 @@ class DisplayTable extends Component {
         this.getData();
       }
 
-    // Delete items
-    onDelete(e) {
-      const query = {"_id": new ObjectId(this.state.selected)};
-  
-      item.deleteOne(query)
-          .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
-          .catch(err => console.error(`Delete failed with error: ${err}`))
-          // getData after deleting item
-          // this.getData();
-      }
+
 
   render() {
 
-      // Delete functionality
-    const handleOnSelect = (row, isSelect) => {
-        // If row selected setState
-        if (isSelect) {
-          console.log(row)
-          this.setState({
-            selected: row.id
-          })
-        // Otherwise clear the state
-        } else {
-          console.log(row)
-          this.setState({
-            selected: []
-          })
-        }
-      }
-  
       // Define selectRow
       const selectRow = {
         mode: 'radio',
         clickToSelect: true,
         selectColumnPosition: 'right',
         hideSelectAll: true,
-        onSelect: handleOnSelect
+        onSelect: this.handleOnSelect
       };
 
     return(
