@@ -3,7 +3,7 @@ import { textFilter } from 'react-bootstrap-table2-filter';
 import Badge from 'react-bootstrap/Badge'
 
 // Define sortCaret
-export const sortFunc = (order, column) => {
+const sortFunc = (order, column) => {
     if (!order) return (<span className="order"><span className="dropdown"><span className="caret"></span></span><span className="dropup"><span className="caret"></span></span></span>);
     else if (order === 'asc') return (<span className="react-bootstrap-table-sort-order"><span className="caret"></span></span>);
     else if (order === 'desc') return (<span className="react-bootstrap-table-sort-order dropup"><span className="caret"></span></span>);
