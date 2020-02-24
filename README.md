@@ -1,6 +1,6 @@
 ##File structure:
 
-'''
+```
 src/
 ├── App.js
 ├── index.css
@@ -12,4 +12,4 @@ src/
     ├── getData.js
     ├── stitchAuth.js
     └── tableColumns.js
-'''
+```
