@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Row, Col } from 'react-bootstrap';
-import { ObjectId } from 'bson'
 
 // Modularized component imports
 import { item } from './stitchAuth'
@@ -18,7 +17,6 @@ class AddForm extends Component {
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
       id: [],
@@ -93,17 +91,6 @@ class AddForm extends Component {
         // getData after insertOne new item
         // this.getData();
         }
-
-    // Delete items
-    onDelete(e) {
-        const query = {"_id": new ObjectId(this.state.selected)};
-
-    item.deleteOne(query)
-        .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
-        .catch(err => console.error(`Delete failed with error: ${err}`))
-        // getData after deleting item
-        // this.getData();
-    }
 
   render() {
 
