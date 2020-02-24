@@ -1,4 +1,4 @@
-##File structure:
+## File structure:
 
 ```
 src/
@@ -13,3 +13,5 @@ src/
     ├── stitchAuth.js
     └── tableColumns.js
 ```
+
+!(https://github.com/hdehal/made-in-usa/raw/master/public/app_readme_screenshot.png)
