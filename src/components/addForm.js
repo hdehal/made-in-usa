@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Row, Col } from 'react-bootstrap';
+import { ObjectId } from 'bson'
 
 // Modularized component imports
 import { item } from './stitchAuth'
@@ -17,12 +18,9 @@ class AddForm extends Component {
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    // this.onDelete = this.onDelete.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
-      id: [],
-      data: [],
-      selected: [],
       // States for checkboxes
       checkboxes: [{ id: "Accessories" }, { id: "Dresses" }, { id: "Pants" }, { id: "Shirts" }, { id: "Shoes" }, { id: "Suits" }, { id: "Swim" }, { id: "Undergarments" }],
       checkboxIds: [],
@@ -82,17 +80,29 @@ class AddForm extends Component {
 
         // Clear the forms
         this.setState({
-        id: '',
-        company: '',
-        url: '',
-        loc: '',
-        gender: '',
-        checkboxIds: []
+          id: '',
+          company: '',
+          url: '',
+          loc: '',
+          gender: '',
+          checkboxIds: []
         })
 
         // getData after insertOne new item
         // this.getData();
         }
+
+        // Delete items in MongoDB Atlas
+        onDelete(e) {
+          console.log(this.props.selected)
+          const query = {"_id": new ObjectId(this.props.selected)};
+
+          item.deleteOne(query)
+            .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
+            .catch(err => console.error(`Delete failed with error: ${err}`))
+            // getData after deleting item
+            // this.getData();
+          }
 
   render() {
 
