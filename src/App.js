@@ -12,14 +12,15 @@ class App extends Component {
   constructor(props){
     super(props);
 
+    this.handleOnSelect = this.handleOnSelect.bind(this)
+
     this.state = {
       selected: []
     }
   }
 
     // Delete functionality setState
-    handleOnSelectProp = {
-      handleOnSelect(row, isSelect){
+    handleOnSelect(row, isSelect){
       // If row selected setState
       if (isSelect) {
           console.log(row)
@@ -34,7 +35,6 @@ class App extends Component {
           })
       }
       }
-    }
 
   render() {
 
@@ -55,9 +55,9 @@ class App extends Component {
           <Switch>
           </Switch>
 
-          <DisplayTable />
+          <DisplayTable handleOnSelectProp={this.handleOnSelect} />
 
-          <AddForm />
+          <AddForm selected={this.state.selected} />
 
         </div>
       </Router>

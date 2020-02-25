@@ -13,7 +13,7 @@ class DisplayTable extends Component {
     constructor(props){
         super(props);
         
-        // this.props.handleOnSelectProp = this.handleOnSelect.bind(this)
+        // this.props.handleOnSelectProp = this.handleOnSelectProp.bind(this)
         // this.onDelete = this.onDelete.bind(this);
 
         this.state = {
@@ -39,9 +39,6 @@ class DisplayTable extends Component {
       async componentDidMount(){
         this.getData();
       }
-
-
-
 
       // Delete items in MongoDB Atlas
       onDelete(e) {
