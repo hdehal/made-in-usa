@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Row, Col } from 'react-bootstrap';
+import { ObjectId } from 'bson'
 
 // Modularized component imports
 import { item } from './stitchAuth'
-import { ObjectId } from 'bson'
 
 class AddForm extends Component {
 

@@ -11,7 +11,8 @@ class DisplayTable extends Component {
     // Initial state
     constructor(props){
         super(props);
-
+        
+        this.handleOnSelect = this.handleOnSelect.bind(this)
         // this.onDelete = this.onDelete.bind(this);
 
         this.state = {
