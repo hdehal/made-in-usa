@@ -13,7 +13,7 @@ class DisplayTable extends Component {
     constructor(props){
         super(props);
         
-        this.handleOnSelect = this.handleOnSelect.bind(this)
+        // this.props.handleOnSelectProp = this.handleOnSelect.bind(this)
         // this.onDelete = this.onDelete.bind(this);
 
         this.state = {
@@ -41,22 +41,7 @@ class DisplayTable extends Component {
       }
 
 
-    // Delete functionality setState
-    handleOnSelect(row, isSelect){
-      // If row selected setState
-      if (isSelect) {
-          console.log(row)
-          this.setState({
-          selected: row.id
-          })
-      // Otherwise clear the state
-      } else {
-          console.log(row)
-          this.setState({
-          selected: []
-          })
-      }
-      }
+
 
       // Delete items in MongoDB Atlas
       onDelete(e) {
@@ -78,7 +63,7 @@ class DisplayTable extends Component {
         clickToSelect: true,
         selectColumnPosition: 'right',
         hideSelectAll: true,
-        onSelect: this.handleOnSelect
+        onSelect: this.props.handleOnSelectProp
       };
 
     return(

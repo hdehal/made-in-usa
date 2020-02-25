@@ -17,6 +17,25 @@ class App extends Component {
     }
   }
 
+    // Delete functionality setState
+    handleOnSelectProp = {
+      handleOnSelect(row, isSelect){
+      // If row selected setState
+      if (isSelect) {
+          console.log(row)
+          this.setState({
+          selected: row.id
+          })
+      // Otherwise clear the state
+      } else {
+          console.log(row)
+          this.setState({
+          selected: []
+          })
+      }
+      }
+    }
+
   render() {
 
     return(
