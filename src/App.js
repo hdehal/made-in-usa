@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 // Modularized component imports
 import AddForm from './components/addForm'
 import DisplayTable from './components/displayTable'
-import ListManagement from './components/listManagement'
 
 class App extends Component {
 
@@ -38,8 +37,6 @@ class App extends Component {
           </Switch>
 
           <DisplayTable />
-
-          <ListManagement selectedItems={this.state.selected} />
 
           <AddForm />
 
