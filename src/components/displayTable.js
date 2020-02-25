@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory from 'react-bootstrap-table2-filter';
+import { ObjectId } from 'bson'
 
 // Modularized component imports
 import { item } from './stitchAuth'
@@ -39,22 +40,35 @@ class DisplayTable extends Component {
         this.getData();
       }
 
-      // Delete functionality
-      handleOnSelect(row, isSelect){
-        // If row selected setState
-        if (isSelect) {
+
+    // Delete functionality setState
+    handleOnSelect(row, isSelect){
+      // If row selected setState
+      if (isSelect) {
           console.log(row)
           this.setState({
-            selected: row.id
+          selected: row.id
           })
-        // Otherwise clear the state
-        } else {
+      // Otherwise clear the state
+      } else {
           console.log(row)
           this.setState({
-            selected: []
+          selected: []
           })
-        }
       }
+      }
+
+      // Delete items in MongoDB Atlas
+      onDelete(e) {
+        console.log(this.state.selected)
+        const query = {"_id": new ObjectId(this.state.selected)};
+
+        item.deleteOne(query)
+            .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
+            .catch(err => console.error(`Delete failed with error: ${err}`))
+            // getData after deleting item
+            // this.getData();
+        }
 
   render() {
 

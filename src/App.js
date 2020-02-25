@@ -7,8 +7,15 @@ import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import AddForm from './components/addForm'
 import DisplayTable from './components/displayTable'
 
-
 class App extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      selected: []
+    }
+  }
 
   render() {
 
