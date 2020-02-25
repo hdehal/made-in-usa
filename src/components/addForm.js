@@ -18,7 +18,7 @@ class AddForm extends Component {
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onDelete = this.onDelete.bind(this);
+//    this.onDelete = this.onDelete.bind(this);
 
     this.state = {
       id: [],
@@ -34,18 +34,6 @@ class AddForm extends Component {
       gender: []
     }
   }
-
-  // Delete items
-  onDelete(e) {
-    console.log(this.state.selected)
-    const query = {"_id": new ObjectId(this.state.selected)};
-
-    item.deleteOne(query)
-        .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
-        .catch(err => console.error(`Delete failed with error: ${err}`))
-        // getData after deleting item
-        // this.getData();
-    }
 
   // Form fields onChange
   onChangeCompanyName(e) {

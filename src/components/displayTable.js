@@ -39,21 +39,22 @@ class DisplayTable extends Component {
         this.getData();
       }
 
-      // Delete functionality
-      handleOnSelect(row, isSelect){
-        // If row selected setState
-        if (isSelect) {
+
+    // Delete functionality
+    handleOnSelect(row, isSelect){
+      // If row selected setState
+      if (isSelect) {
           console.log(row)
           this.setState({
-            selected: row.id
+          selected: row.id
           })
-        // Otherwise clear the state
-        } else {
+      // Otherwise clear the state
+      } else {
           console.log(row)
           this.setState({
-            selected: []
+          selected: []
           })
-        }
+      }
       }
 
   render() {
