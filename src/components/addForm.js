@@ -110,7 +110,7 @@ class AddForm extends Component {
     const { checkboxes, checkboxIds } = this.state;
 
     return(
-        <div className="container">
+        <div className="mainContainer">
             <h4>Add New Company</h4>
             <form onSubmit={this.onSubmit}>
                 <Form.Group>
