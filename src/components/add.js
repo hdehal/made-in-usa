@@ -14,9 +14,7 @@ constructor(props){
   render() {
 
     return(
-        <div>
-            <AddForm selected={this.props.selected} />
-        </div>
+      <AddForm selected={this.props.selected} />
     );
 }
 }

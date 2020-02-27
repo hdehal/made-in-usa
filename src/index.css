@@ -82,3 +82,7 @@ code {
 .navbar {
   margin-bottom: 1em;
 }
+/* mainContainer styling */
+.mainContainer {
+  margin: 1em;
+}
