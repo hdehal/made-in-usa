@@ -75,3 +75,10 @@ code {
   width: max-content;
   margin-left: 0.5em;
 }
+/* Header and nav styling */
+.navbar-nav a {
+  margin-right: 0.25em;
+}
+.navbar {
+  margin-bottom: 1em;
+}
