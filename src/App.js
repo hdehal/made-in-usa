@@ -16,6 +16,10 @@ class App extends Component {
   constructor(props){
     super(props);
 
+    this.state = {
+      selected: []
+    }
+
     this.handleOnSelect = this.handleOnSelect.bind(this)
   }
 
@@ -43,7 +47,7 @@ class App extends Component {
         <Navigation />
           <Switch>
             <Route path="/" component={Home} exact/>
-            <Route path="/add" component={Add}/>
+            <Route path="/add" component={() => <Add selected={this.state.selected} />} />
             <Route path="/contact" component={Contact}/>
             <Route component={Error}/>
           </Switch>

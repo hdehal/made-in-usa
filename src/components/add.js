@@ -15,7 +15,7 @@ constructor(props){
 
     return(
         <div>
-            <AddForm selected={this.state.selected} />
+            <AddForm selected={this.props.selected} />
         </div>
     );
 }
