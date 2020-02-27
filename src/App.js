@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Modularized component imports
+import Home from './components/home';
+import About from './components/about';
+import Contact from './components/contact';
+import Error from './components/error';
+import Navigation from './components/navigation';
 import AddForm from './components/addForm'
 import DisplayTable from './components/displayTable'
 
@@ -39,28 +44,20 @@ class App extends Component {
   render() {
 
     return(
-      <Router>
-        <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link to={'/'} className="navbar-brand"><span role="img" aria-label="US flag">🇺🇸</span> Made in USA List</Link>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                  <Link to={'/'} className="nav-link">Home</Link>
-                  <Link to={'/addForm.js'} className="nav-link">Add</Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
+      <BrowserRouter>
+        <Navigation />
           <Switch>
+            <Route path="/" component={Home} exact/>
+            <Route path="/about" component={About}/>
+            <Route path="/contact" component={Contact}/>
+            <Route component={Error}/>
           </Switch>
 
           <DisplayTable handleOnSelectProp={this.handleOnSelect} />
 
           <AddForm selected={this.state.selected} />
 
-        </div>
-      </Router>
+      </BrowserRouter>
     )
   }
 }
