@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Row, Col } from 'react-bootstrap';
-import { ObjectId } from 'bson'
+import { ObjectId } from 'bson';
+import Recaptcha from 'react-recaptcha';
 
 // Modularized component imports
 import { item } from './stitchAuth'
@@ -20,6 +21,9 @@ class AddForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
 
+    this.onloadCallback = this.onloadCallback.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+
     this.state = {
       // States for checkboxes
       checkboxes: [{ id: "Accessories" }, { id: "Dresses" }, { id: "Pants" }, { id: "Shirts" }, { id: "Shoes" }, { id: "Suits" }, { id: "Swim" }, { id: "Undergarments" }],
@@ -28,7 +32,8 @@ class AddForm extends Component {
       company: [],
       url: [],
       loc: [],
-      gender: []
+      gender: [],
+      isVerified: false
     }
   }
 
@@ -104,6 +109,19 @@ class AddForm extends Component {
             // this.getData();
           }
 
+          onloadCallback() {
+            console.log("Captcha loaded!");
+          }
+
+          // Recaptcha verification response
+          verifyCallback(response) {
+            if(response) {
+              this.setState({
+                isVerified: true
+              })
+            }
+          }
+
   render() {
 
     // Define checkboxes state
@@ -172,10 +190,18 @@ class AddForm extends Component {
                   </Col>
                 </Form.Group>
 
+                <Recaptcha
+                  sitekey="6LdaT90UAAAAAPhUh2D2odXQQB47ilnXw2mhCwAj"
+                  render="explicit"
+                  onloadCallback={this.onloadCallback}
+                  verifyCallback={this.verifyCallback}
+                />
+
                 <Form.Group>
-                    <Button type="submit" value="Submit">Submit</Button>
+                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isVerified}>Submit</Button>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
                 </Form.Group>
+
             </form>
         </div>
     )

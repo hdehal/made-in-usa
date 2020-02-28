@@ -80,3 +80,7 @@ body {
 .mainContainer {
   margin: 1em;
 }
+/* recaptcha styling */
+#g-recaptcha {
+  margin: 1em 0em 1em 0em;
+}
