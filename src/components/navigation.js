@@ -1,19 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button'
 
 const Navigation = () => {
     return (
         <Navbar bg="light" expand="lg">
-        <Navbar.Brand to={'/'}><span role="img" aria-label="US flag">🇺🇸</span> Made in USA List</Navbar.Brand>
+        <Link to={'/'}><Navbar.Brand><span role="img" aria-label="US flag">🇺🇸</span> Made in USA List</Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to="/add">Add</NavLink>
-                    <NavLink to="/contact">Contact</NavLink>
+                    {/* <NavLink to="/">Home</NavLink> */}
+                    <NavLink to="/add">Add Company</NavLink>
                 </Nav>
+            </Navbar.Collapse>
+            <Navbar.Collapse className="justify-content-end">
+                <NavLink to="/about">
+                    <Button size="sm" variant="secondary">About</Button>
+                </NavLink>
             </Navbar.Collapse>
         </Navbar>
     );
