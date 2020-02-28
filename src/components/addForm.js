@@ -21,8 +21,8 @@ class AddForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
 
-    this.handleSubscribe = this.handleSubscribe.bind(this);
     this.onloadCallback = this.onloadCallback.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
 
     this.state = {
       // States for checkboxes
@@ -113,14 +113,7 @@ class AddForm extends Component {
             console.log("Captcha loaded!");
           }
 
-          handleSubscribe() {
-            if(this.state.isVerified === true) {
-              alert("success")
-            } else {
-              alert("need to verify")
-            }
-          }
-
+          // Recaptcha verification response
           verifyCallback(response) {
             if(response) {
               this.setState({
@@ -205,7 +198,7 @@ class AddForm extends Component {
                 />
 
                 <Form.Group>
-                    <Button type="submit" value="Submit" onClick={this.handleSubscribe}>Submit</Button>
+                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isVerified}>Submit</Button>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
                 </Form.Group>
 
