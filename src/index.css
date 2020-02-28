@@ -5,18 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #999;
+  background: rgb(204,204,204);
+  background: linear-gradient(90deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 100%);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .table {
   background: #FFF;
 }
-
 /* Missing from Boostrap CSS */
 .caret {
   display:inline-block;
