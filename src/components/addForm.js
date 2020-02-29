@@ -89,7 +89,8 @@ class AddForm extends Component {
           url: '',
           loc: '',
           gender: '',
-          checkboxIds: []
+          checkboxIds: [],
+          isVerified: false
         })
 
         // getData after insertOne new item
