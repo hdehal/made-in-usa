@@ -208,7 +208,6 @@ class AddForm extends Component {
 
                 <Form.Check
                     type="hidden"
-                    onChange={this.onChangeisVerified}
                     disabled
                   />
 
