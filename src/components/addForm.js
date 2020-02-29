@@ -130,10 +130,17 @@ class AddForm extends Component {
             }
           }
 
+
   render() {
 
     // Define checkboxes state
     const { checkboxes, checkboxIds } = this.state;
+
+    // Recaptcha reset function
+    let recaptchaInstance;
+    const resetRecaptcha = () => {
+    recaptchaInstance.reset();
+    };
 
     return(
         <div className="mainContainer">
@@ -210,10 +217,11 @@ class AddForm extends Component {
                   render="explicit"
                   onloadCallback={this.onloadCallback}
                   verifyCallback={this.verifyCallback}
+                  ref={e => recaptchaInstance = e}
                 />
 
                 <Form.Group>
-                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified}>Submit</Button>
+                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified} onClick={resetRecaptcha}>Submit</Button>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
                 </Form.Group>
 
