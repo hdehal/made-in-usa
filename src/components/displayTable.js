@@ -19,7 +19,7 @@ class DisplayTable extends Component {
   
       getData(){
           // Find database documents
-          item.find({})
+          item.find({"isVerified":false})
           .toArray()
           .then(data => 
             data.map(x=>{ return { ...x, id: x._id.toString()}; })

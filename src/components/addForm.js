@@ -19,6 +19,7 @@ class AddForm extends Component {
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.onChangeisVerified = this.onChangeisVerified.bind(this);
 
     this.onloadCallback = this.onloadCallback.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
@@ -32,12 +33,13 @@ class AddForm extends Component {
       url: [],
       loc: [],
       gender: [],
+      isCaptchaVerified: false,
       isVerified: false
     }
   }
 
   // Form fields onChange
-  onChangeCompanyName(e) {
+    onChangeCompanyName(e) {
     this.setState({
         company: e.target.value
     });
@@ -57,6 +59,11 @@ class AddForm extends Component {
         gender: e.target.value
     });
     }
+    onChangeisVerified(e) {
+      this.setState({
+        isVerified: e.target.checked
+    });
+    }
 
     // Checkboxes onChange
     checkboxOnChange = event => {
@@ -74,8 +81,8 @@ class AddForm extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.checkboxIds }
-        console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, and ${this.state.checkboxIds}`)
+        var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, gender: this.state.gender, tags: this.state.checkboxIds, isVerified: this.state.isVerified }
+        // console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, ${this.state.checkboxIds}, ${this.state.isVerified}`)
 
         // Insert new item
         item.insertOne(newItem)
@@ -90,6 +97,7 @@ class AddForm extends Component {
           loc: '',
           gender: '',
           checkboxIds: [],
+          isCaptchaVerified: false,
           isVerified: false
         })
 
@@ -117,7 +125,7 @@ class AddForm extends Component {
           verifyCallback(response) {
             if(response) {
               this.setState({
-                isVerified: true
+                isCaptchaVerified: true
               })
             }
           }
@@ -191,6 +199,12 @@ class AddForm extends Component {
                   </div>
                 </Form.Group>
 
+                <Form.Check
+                    type="hidden"
+                    onChange={this.onChangeisVerified}
+                    disabled
+                  />
+
                 <Recaptcha
                   sitekey="6LdaT90UAAAAAPhUh2D2odXQQB47ilnXw2mhCwAj"
                   render="explicit"
@@ -199,7 +213,7 @@ class AddForm extends Component {
                 />
 
                 <Form.Group>
-                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isVerified}>Submit</Button>
+                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified}>Submit</Button>
                     <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
                 </Form.Group>
 
