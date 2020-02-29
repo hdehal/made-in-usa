@@ -84,3 +84,7 @@ body {
 #g-recaptcha {
   margin: 1em 0em 1em 0em;
 }
+/* misc */
+.form-label {
+  font-weight: 600;
+}

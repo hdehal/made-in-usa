@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { Row, Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { ObjectId } from 'bson';
 import Recaptcha from 'react-recaptcha';
 
 // Modularized component imports
-import { item } from './stitchAuth'
+import { item } from './stitchAuth';
 
 class AddForm extends Component {
 
@@ -132,7 +131,7 @@ class AddForm extends Component {
             <h4>Add New Company</h4>
             <form onSubmit={this.onSubmit}>
                 <Form.Group>
-                    <label>Company Name:</label>
+                    <Form.Label>Company Name:</Form.Label>
                     <Form.Control 
                         type="text"
                         size="sm"
@@ -141,7 +140,7 @@ class AddForm extends Component {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <label>URL:</label>
+                    <Form.Label>URL:</Form.Label>
                     <Form.Control 
                         type="text"
                         size="sm"
@@ -150,7 +149,7 @@ class AddForm extends Component {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <label>Location:</label>
+                    <Form.Label>Location:</Form.Label>
                     <Form.Control 
                         type="text"
                         size="sm"
@@ -159,7 +158,7 @@ class AddForm extends Component {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <label>Gender:</label>
+                    <Form.Label>Gender:</Form.Label>
                     <select
                       className="form-control dropdown-toggle btn btn-secondary"
                       onChange={this.onChangeGender}
@@ -172,22 +171,23 @@ class AddForm extends Component {
                     </select>
                 </Form.Group>
 
-                <Form.Group as={Row}>
-                  <Form.Label as="legend" column sm={2}>
+                <Form.Group>
+                  <Form.Label>
                     Category/Tags:
                   </Form.Label>
-                  <Col lg={2}>
+                  <div className="mb-3">
                     {checkboxes.map(checkbox => (
-                      <Form.Check
+                      <Form.Check inline
                         key={checkbox.id}
                         label={checkbox.id}
+                        id={checkbox.id}
                         type="checkbox"
                         checked={checkboxIds.includes(checkbox.id)}
                         name={checkbox.id}
                         onChange={this.checkboxOnChange}
                       />
                     ))}
-                  </Col>
+                  </div>
                 </Form.Group>
 
                 <Recaptcha
