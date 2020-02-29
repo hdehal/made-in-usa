@@ -10,7 +10,6 @@ import About from './components/about';
 import Error from './components/error';
 import Navigation from './components/navigation';
 import DisplayTable from './components/displayTable'
-import AlertDismissible from './components/alerts'
 
 class App extends Component {
 
@@ -52,8 +51,6 @@ class App extends Component {
             <Route path="/about" component={About}/>
             <Route component={Error}/>
           </Switch>
-
-          <AlertDismissible />
 
           <DisplayTable handleOnSelectProp={this.handleOnSelect} />
 

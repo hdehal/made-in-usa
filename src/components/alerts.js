@@ -9,14 +9,14 @@ constructor(props){
     this.onClickAlert = this.onClickAlert.bind(this);
 
     this.state = {
-        setShow: true
+        setShowAlert: true
     }
   }
 
 // Alerts onChange
 onClickAlert(e) {
     this.setState({
-        setShow: false
+        setShowAlert: false
 });
 }
 
@@ -24,8 +24,8 @@ onClickAlert(e) {
 
     return(
         <div className="mainContainer">
-        <Alert show={this.state.setShow} variant="success" onClick={this.onClickAlert} dismissible>
-            <Alert.Heading>Test Heading</Alert.Heading>
+        <Alert show={this.state.setShowAlert} variant="success" onClick={this.onClickAlert} dismissible>
+            <Alert.Heading>{this.state.setHeadingAlert}</Alert.Heading>
             <p>
             Test Message Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
             lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
