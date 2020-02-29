@@ -25,7 +25,7 @@ class AddForm extends Component {
 
     this.state = {
       // States for checkboxes
-      checkboxes: [{ id: "Accessories" }, { id: "Dresses" }, { id: "Pants" }, { id: "Shirts" }, { id: "Shoes" }, { id: "Suits" }, { id: "Swim" }, { id: "Undergarments" }],
+      checkboxes: [{ id: "Accessories" }, { id: "Bottoms" }, { id: "Dresses" }, { id: "Formal" }, { id: "Shoes" }, { id: "Swim" }, { id: "Tops" }, { id: "Undergarments" }],
       checkboxIds: [],
       // States below to prevent input elements from switching from uncontrolled to controlled 
       company: [],
