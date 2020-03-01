@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 // Modularized component imports
 import Home from './components/home';
@@ -43,7 +44,12 @@ class App extends Component {
   render() {
 
     return(
+
       <BrowserRouter>
+      <Helmet>
+        <title>Made in USA List</title>
+      </Helmet>
+
         <Navigation />
           <Switch>
             <Route path="/" component={Home} exact/>
@@ -55,7 +61,6 @@ class App extends Component {
           <DisplayTable handleOnSelectProp={this.handleOnSelect} />
 
       </BrowserRouter>
-      
     )
   }
 }
