@@ -78,6 +78,20 @@ class AddForm extends Component {
       });
     };
 
+    resetForm = () => {
+      // Reset and clear the forms
+      this.setState({
+        id: '',
+        company: '',
+        url: '',
+        loc: '',
+        gender: '',
+        checkboxIds: [],
+        isCaptchaVerified: false,
+        isVerified: false
+      })
+    }
+    
     onSubmit(e) {
         e.preventDefault();
 
@@ -89,17 +103,7 @@ class AddForm extends Component {
         .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
         .catch(err => console.error(`Failed to insert item: ${err}`))
 
-        // Clear the forms
-        this.setState({
-          id: '',
-          company: '',
-          url: '',
-          loc: '',
-          gender: '',
-          checkboxIds: [],
-          isCaptchaVerified: false,
-          isVerified: false
-        })
+        this.resetForm()
 
         // getData after insertOne new item
         // this.getData();
