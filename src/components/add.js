@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddForm from './addForm'
-import Alerts from './alerts'
+import DisplayAlerts from './displayAlerts'
 
 class Add extends Component {
 
@@ -16,7 +16,7 @@ constructor(props){
 
     return(
       <div>
-        <Alerts setShow={this.props.setShowAlert} setHeadingAlert={this.props.setHeadingAlert} />
+        <DisplayAlerts />
         <AddForm selected={this.props.selected} />
       </div>
     );

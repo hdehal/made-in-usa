@@ -98,9 +98,7 @@ class AddForm extends Component {
           gender: '',
           checkboxIds: [],
           isCaptchaVerified: false,
-          isVerified: false,
-          // Alert of success
-          setHeadingAlert: 'SUCCESS!!!'
+          isVerified: false
         })
 
         // getData after insertOne new item
