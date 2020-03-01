@@ -41,9 +41,16 @@ body {
 .order .dropdown, .order .dropup {
   opacity: 0.4;
 }
-/* Extra button styling */
+/* Form styling */
 .form-group .btn {
   margin-right: 0.5em;
+}
+.form-label {
+  font-weight: 600;
+}
+.form-control.dropdown-toggle.btn.btn-secondary {
+  width: max-content;
+  margin-left: 0.5em;
 }
 /* Single radio button styling for delete functionality */
 .selection-cell input[type="radio"] {
@@ -64,11 +71,6 @@ body {
   background-color: #EEE;
   margin-left: 0.5em;
 }
-/* Dropdown styling */
-.form-control.dropdown-toggle.btn.btn-secondary {
-  width: max-content;
-  margin-left: 0.5em;
-}
 /* Header and nav styling */
 .navbar-nav a {
   margin-right: 0.25em;
@@ -84,7 +86,11 @@ body {
 #g-recaptcha {
   margin: 1em 0em 1em 0em;
 }
-/* misc */
-.form-label {
-  font-weight: 600;
+/* Truncate long links in table using pure CSS */
+td a {
+  width: 300px;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
 }

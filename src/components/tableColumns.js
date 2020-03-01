@@ -34,12 +34,18 @@ export const tableColumns = [
     dataField: 'loc',
     text: 'Location',
     sort: true,
-    sortCaret: sortFunc
+    sortCaret: sortFunc,
+    headerStyle: (column, colIndex) => {
+        return { width: '175px' }; 
+    }
 }, {
     dataField: 'gender',
     text: 'Gender',
     sort: true,
-    sortCaret: sortFunc
+    sortCaret: sortFunc,
+    headerStyle: (column, colIndex) => {
+        return { width: '100px' };
+    }
 }, {
     dataField: 'tags',
     text: 'Tags',
