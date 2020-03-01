@@ -78,6 +78,20 @@ class AddForm extends Component {
       });
     };
 
+    resetForm = () => {
+      // Reset and clear the forms
+      this.setState({
+        id: '',
+        company: '',
+        url: '',
+        loc: '',
+        gender: '',
+        checkboxIds: [],
+        isCaptchaVerified: false,
+        isVerified: false
+      })
+    }
+    
     onSubmit(e) {
         e.preventDefault();
 
@@ -89,17 +103,7 @@ class AddForm extends Component {
         .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
         .catch(err => console.error(`Failed to insert item: ${err}`))
 
-        // Clear the forms
-        this.setState({
-          id: '',
-          company: '',
-          url: '',
-          loc: '',
-          gender: '',
-          checkboxIds: [],
-          isCaptchaVerified: false,
-          isVerified: false
-        })
+        this.resetForm()
 
         // getData after insertOne new item
         // this.getData();
@@ -139,7 +143,7 @@ class AddForm extends Component {
     // Recaptcha reset function
     let recaptchaInstance;
     const resetRecaptcha = () => {
-    recaptchaInstance.reset();
+      recaptchaInstance.reset();
     };
 
     return(
@@ -221,7 +225,12 @@ class AddForm extends Component {
 
                 <Form.Group>
                     <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified} onClick={resetRecaptcha}>Submit</Button>
-                    <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
+                    {/* <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button> */}
+                    <Button className="btn" variant="danger" type="reset"
+                    onClick={() => {
+                      this.resetForm();
+                      resetRecaptcha()
+                   }}>Reset</Button>
                 </Form.Group>
 
             </form>
