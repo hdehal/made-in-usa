@@ -1,4 +1,4 @@
-## Get started:
+## Get Started:
 1. Clone the repo:
 ```
 git clone https://github.com/hdehal/made-in-usa.git
@@ -14,7 +14,7 @@ https://stitch.mongodb.com
 REACT_APP_STITCH_API_KEY=<YOUR-API-KEY-HERE>
 ```
 
-## File structure:
+## File Structure:
 
 ```
 src/
@@ -22,10 +22,14 @@ src/
 ├── index.css
 ├── index.js
 └── components/
+    ├── about.js
+    ├── add.js
     ├── addForm.js
-    ├── deleteData.js
+    ├── displayAlerts.js
     ├── displayTable.js
-    ├── getData.js
+    ├── error.js
+    ├── home.js
+    ├── navigation.js
     ├── stitchAuth.js
     └── tableColumns.js
 ```

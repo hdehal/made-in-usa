@@ -29,10 +29,10 @@ class AddForm extends Component {
       checkboxes: [{ id: "Accessories" }, { id: "Bottoms" }, { id: "Dresses" }, { id: "Formal" }, { id: "Shoes" }, { id: "Swim" }, { id: "Tops" }, { id: "Undergarments" }],
       checkboxIds: [],
       // States below to prevent input elements from switching from uncontrolled to controlled 
-      company: [],
-      url: [],
-      loc: [],
-      gender: [],
+      company: '',
+      url: '',
+      loc: '',
+      gender: '',
       isCaptchaVerified: false,
       isVerified: false
     }
