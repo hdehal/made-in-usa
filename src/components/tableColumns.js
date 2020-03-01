@@ -1,6 +1,6 @@
 import React from 'react';
 import { textFilter } from 'react-bootstrap-table2-filter';
-import Badge from 'react-bootstrap/Badge'
+import Badge from 'react-bootstrap/Badge';
 
 // Define sortCaret
 const sortFunc = (order, column) => {

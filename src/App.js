@@ -9,7 +9,7 @@ import Add from './components/add';
 import About from './components/about';
 import Error from './components/error';
 import Navigation from './components/navigation';
-import DisplayTable from './components/displayTable'
+import DisplayTable from './components/displayTable';
 
 class App extends Component {
 

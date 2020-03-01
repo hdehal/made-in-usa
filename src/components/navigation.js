@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 
 const Navigation = () => {
     return (
