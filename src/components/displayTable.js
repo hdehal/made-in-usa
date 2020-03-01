@@ -46,6 +46,12 @@ class DisplayTable extends Component {
         onSelect: this.props.handleOnSelectProp
       }; */
 
+      // Default sorting
+      const defaultSorted = [{
+        dataField: 'company',
+        order: 'asc'
+      }];
+
     return(
         <div>
           <BootstrapTable
@@ -54,6 +60,7 @@ class DisplayTable extends Component {
             columns={tableColumns}
             // selectRow={ selectRow }
             filter={ filterFactory() }
+            defaultSorted={ defaultSorted } 
             striped
             hover
             condensed
