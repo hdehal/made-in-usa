@@ -21,7 +21,8 @@ export const item = mongoClient.db("vendor").collection("vendor-item");
 
 // API authentication
 // https://stitch.mongodb.com > (your app) > Users > Providers > API Key (On) && Users > Add
-const credential = new UserApiKeyCredential(process.env.REACT_APP_STITCH_API_KEY)
+// This API key has DB read-write access only, DB delete functionality is disabled, all entries will be queued to be approved by the admin
+const credential = new UserApiKeyCredential('V6LG4GfuM1tHrCA9XCHprjF2TqBzcEgZbXdr6TRPwwz3NYLzlR5Y6sGZ55vIyDmf')
 
 Stitch.defaultAppClient.auth.loginWithCredential(credential)
   .then(authedId => {
