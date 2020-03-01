@@ -55,6 +55,7 @@ class App extends Component {
           <DisplayTable handleOnSelectProp={this.handleOnSelect} />
 
       </BrowserRouter>
+      
     )
   }
 }
