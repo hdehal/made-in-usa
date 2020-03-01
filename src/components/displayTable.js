@@ -38,13 +38,13 @@ class DisplayTable extends Component {
   render() {
 
       // Define selectRow
-      const selectRow = {
+      /* const selectRow = {
         mode: 'radio',
         clickToSelect: true,
         selectColumnPosition: 'right',
         hideSelectAll: true,
         onSelect: this.props.handleOnSelectProp
-      };
+      }; */
 
     return(
         <div>
@@ -52,7 +52,7 @@ class DisplayTable extends Component {
             keyField="id"
             data={this.state.data}
             columns={tableColumns}
-            selectRow={ selectRow }
+            // selectRow={ selectRow }
             filter={ filterFactory() }
             striped
             hover

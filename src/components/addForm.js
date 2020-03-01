@@ -225,7 +225,7 @@ class AddForm extends Component {
 
                 <Form.Group>
                     <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified} onClick={resetRecaptcha}>Submit</Button>
-                    <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button>
+                    {/* <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button> */}
                     <Button className="btn" variant="danger" type="reset"
                     onClick={() => {
                       this.resetForm();
