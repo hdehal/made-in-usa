@@ -17,10 +17,11 @@ class DisplayTable extends Component {
         }
       }
   
-      getData(){
-          // Find database documents
-          // item.find({"isVerified":true})
-          item().find({"isVerified":true})
+
+      // Find database documents
+      async getData() {  
+        (await item())
+        .find({"isVerified":true})
           .toArray()
           .then(data => 
             data.map(x=>{ return { ...x, id: x._id.toString()}; })
