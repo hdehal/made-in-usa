@@ -52,9 +52,9 @@ class App extends Component {
 
         <Navigation />
           <Switch>
-            <Route path={`${process.env.PUBLIC_URL}/`} component={Home} exact/>
-            <Route path={`${process.env.PUBLIC_URL}/add`} component={() => <Add selected={this.state.selected} />} />
-            <Route path={`${process.env.PUBLIC_URL}/about`} component={About}/>
+            <Route path="/" component={Home} exact/>
+            <Route path="/add" component={() => <Add selected={this.state.selected} />} />
+            <Route path="/about" component={About}/>
             <Route component={Error}/>
           </Switch>
 
