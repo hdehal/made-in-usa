@@ -2,7 +2,7 @@ import React from 'react';
  
 const Error = () => {
     return (
-        <div>
+        <div className="mainContainer">
             <p>404 Error: Page does not exist</p>
         </div>
     );
