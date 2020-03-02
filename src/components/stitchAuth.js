@@ -24,8 +24,8 @@ const credential = new UserApiKeyCredential('V6LG4GfuM1tHrCA9XCHprjF2TqBzcEgZbXd
 // Define db and collection
 var isAuthed = false;
 var collection = null;
-export const item = async () => { 
-  await new Promise((resolve, reject) => { 
+export const item = () => { 
+  return new Promise((resolve, reject) => { 
     if(isAuthed) { resolve(collection); } 
     else { 
       Stitch.defaultAppClient.auth.loginWithCredential(credential)
