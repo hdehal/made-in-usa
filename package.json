@@ -1,5 +1,6 @@
 {
   "name": "made-in-usa",
+  "homepage": "https://hdehal.github.io/st",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "yarn run build && gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
