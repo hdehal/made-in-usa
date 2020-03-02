@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8ec5cab4a43d11e025b34d724d950e5f",
+    "revision": "55761090e068136205c84fe780009af3",
     "url": "/made-in-usa/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/made-in-usa/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "79e86bb4bf5c02e81a90",
+    "revision": "08ed32bde5daac9233bf",
     "url": "/made-in-usa/static/css/main.9ef9ca9d.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/made-in-usa/static/js/2.b8914b77.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "79e86bb4bf5c02e81a90",
-    "url": "/made-in-usa/static/js/main.c07fee6b.chunk.js"
+    "revision": "08ed32bde5daac9233bf",
+    "url": "/made-in-usa/static/js/main.c1494dd6.chunk.js"
   },
   {
     "revision": "f412d381685923c69ab6",
