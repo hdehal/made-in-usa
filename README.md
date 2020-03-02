@@ -34,4 +34,4 @@ src/
     └── tableColumns.js
 ```
 
-![Screenshot](https://github.com/hdehal/made-in-usa/raw/master/public/app_readme_screenshot.png)
+![Screenshot](https://github.com/hdehal/made-in-usa/raw/master/public/app_screenshot.png)

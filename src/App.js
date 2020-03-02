@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import {Helmet} from "react-helmet";
 
 // Modularized component imports
 import Home from './components/home';
@@ -46,11 +45,6 @@ class App extends Component {
     return(
 
       <BrowserRouter basename="/st">
-      <Helmet>
-        <title>Made in USA List</title>
-        <link rel="icon" type="image/png" href={process.env.PUBLIC_URL + '/favicon.png'} sizes="16x16" />
-        <meta property="og:image" content={process.env.PUBLIC_URL + '/app_screenshot.png'} />
-      </Helmet>
 
         <Navigation />
           <Switch>
