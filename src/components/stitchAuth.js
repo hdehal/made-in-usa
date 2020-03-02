@@ -21,7 +21,7 @@ export const mongoClient = app.getServiceClient(
 // This API key has DB read-write access only, DB delete functionality is disabled, all entries will be queued to be approved by the admin
 const credential = new UserApiKeyCredential('V6LG4GfuM1tHrCA9XCHprjF2TqBzcEgZbXdr6TRPwwz3NYLzlR5Y6sGZ55vIyDmf')
 
-// Define db and collection
+// Define db and collection -- READ
 var isAuthed = false;
 var collection = null;
 export const item = () => { 
@@ -34,3 +34,6 @@ export const item = () => {
     }
   });
 };
+
+// Define db and collection -- WRITE and DELETE
+export const itemModify = mongoClient.db("vendor").collection("vendor-item");

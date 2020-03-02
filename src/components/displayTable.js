@@ -17,7 +17,6 @@ class DisplayTable extends Component {
         }
       }
   
-
       // Find database documents
       async getData() {  
         (await item())
