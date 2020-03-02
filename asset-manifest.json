@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/made-in-usa/static/css/main.9ef9ca9d.chunk.css",
+    "main.js": "/made-in-usa/static/js/main.c07fee6b.chunk.js",
+    "main.js.map": "/made-in-usa/static/js/main.c07fee6b.chunk.js.map",
+    "runtime-main.js": "/made-in-usa/static/js/runtime-main.6ec9bbe0.js",
+    "runtime-main.js.map": "/made-in-usa/static/js/runtime-main.6ec9bbe0.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/made-in-usa/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.b8914b77.chunk.js": "/made-in-usa/static/js/2.b8914b77.chunk.js",
+    "static/js/2.b8914b77.chunk.js.map": "/made-in-usa/static/js/2.b8914b77.chunk.js.map",
+    "index.html": "/made-in-usa/index.html",
+    "precache-manifest.45cfd7ecf2359e93dff4678a73953fe8.js": "/made-in-usa/precache-manifest.45cfd7ecf2359e93dff4678a73953fe8.js",
+    "service-worker.js": "/made-in-usa/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/made-in-usa/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.9ef9ca9d.chunk.css.map": "/made-in-usa/static/css/main.9ef9ca9d.chunk.css.map",
+    "static/js/2.b8914b77.chunk.js.LICENSE.txt": "/made-in-usa/static/js/2.b8914b77.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6ec9bbe0.js",
+    "static/css/2.47e06e2e.chunk.css",
+    "static/js/2.b8914b77.chunk.js",
+    "static/css/main.9ef9ca9d.chunk.css",
+    "static/js/main.c07fee6b.chunk.js"
+  ]
+}
