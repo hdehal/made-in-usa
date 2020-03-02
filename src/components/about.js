@@ -12,7 +12,7 @@ const About = () => {
             </p>
             <hr />
             <p className="mb-0">
-                This is a personal coding project built as a Single Page Application (SPA) using <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">React</a> with a <a href="https://www.mongodb.com/cloud/atlas" target="_blank" rel="noopener noreferrer">cloud MongoDB service</a>. Open source and proudly hosted on <a href="https://github.com/hdehal/made-in-usa" target="_blank" rel="noopener noreferrer">GitHub</a>.
+                This is a personal coding project built as a Single Page Application (SPA) using <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">React</a> and <a href="https://react-bootstrap.github.io/" target="_blank" rel="noopener noreferrer">Bootstrap</a> with a <a href="https://www.mongodb.com/cloud/atlas" target="_blank" rel="noopener noreferrer">cloud MongoDB service</a>. Open source and proudly hosted on <a href="https://github.com/hdehal/made-in-usa" target="_blank" rel="noopener noreferrer">GitHub</a>.
             </p>
             </Alert>
         </div>

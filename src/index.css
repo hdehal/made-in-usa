@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: rgb(204,204,204);
-  background: linear-gradient(90deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,.05) 0%, rgba(255,255,255,1) 100%);
 }
 .table {
   background: #FFF;
