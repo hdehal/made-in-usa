@@ -45,16 +45,16 @@ class App extends Component {
 
     return(
 
-      <BrowserRouter>
+      <BrowserRouter basename="/st">
       <Helmet>
         <title>Made in USA List</title>
       </Helmet>
 
         <Navigation />
           <Switch>
-            <Route path="/" component={Home} exact/>
-            <Route path="/add" component={() => <Add selected={this.state.selected} />} />
-            <Route path="/about" component={About}/>
+            <Route path={`${process.env.PUBLIC_URL}/`} component={Home} exact/>
+            <Route path={`${process.env.PUBLIC_URL}/add`} component={() => <Add selected={this.state.selected} />} />
+            <Route path={`${process.env.PUBLIC_URL}/about`} component={About}/>
             <Route component={Error}/>
           </Switch>
 
