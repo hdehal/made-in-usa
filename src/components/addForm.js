@@ -5,7 +5,7 @@ import { ObjectId } from 'bson';
 import Recaptcha from 'react-recaptcha';
 
 // Modularized component imports
-import { item } from './stitchAuth';
+import { itemModify } from './stitchAuth';
 
 class AddForm extends Component {
 
@@ -99,7 +99,7 @@ class AddForm extends Component {
         // console.log(`The values are ${this.state.company}, ${this.state.url}, ${this.state.loc}, ${this.state.gender}, ${this.state.checkboxIds}, ${this.state.isVerified}`)
 
         // Insert new item
-        item.insertOne(newItem)
+        itemModify.insertOne(newItem)
         .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
         .catch(err => console.error(`Failed to insert item: ${err}`))
 
@@ -114,7 +114,7 @@ class AddForm extends Component {
           console.log(this.props.selected)
           const query = {"_id": new ObjectId(this.props.selected)};
 
-          item.deleteOne(query)
+          itemModify.deleteOne(query)
             .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
             .catch(err => console.error(`Delete failed with error: ${err}`))
             // getData after deleting item
