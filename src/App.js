@@ -48,6 +48,8 @@ class App extends Component {
       <BrowserRouter basename="/st">
       <Helmet>
         <title>Made in USA List</title>
+        <link rel="icon" type="image/png" href={process.env.PUBLIC_URL + '/favicon.png'} sizes="16x16" />
+        <meta property="og:image" content={process.env.PUBLIC_URL + '/app_screenshot.png'} />
       </Helmet>
 
         <Navigation />
