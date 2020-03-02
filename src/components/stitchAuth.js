@@ -16,16 +16,21 @@ export const mongoClient = app.getServiceClient(
     "mongodb-atlas"
   );
 
-// Define db and collection
-export const item = mongoClient.db("vendor").collection("vendor-item");
-
 // API authentication
 // https://stitch.mongodb.com > (your app) > Users > Providers > API Key (On) && Users > Add
 // This API key has DB read-write access only, DB delete functionality is disabled, all entries will be queued to be approved by the admin
 const credential = new UserApiKeyCredential('V6LG4GfuM1tHrCA9XCHprjF2TqBzcEgZbXdr6TRPwwz3NYLzlR5Y6sGZ55vIyDmf')
 
-Stitch.defaultAppClient.auth.loginWithCredential(credential)
-  .then(authedId => {
-     console.log(`Successfully connected to the database!`);
-  })
-  .catch(err => console.error(`Login failed with error: ${err}`));
+// Define db and collection
+var isAuthed = false;
+var collection = null;
+export const item = async () => { 
+  await new Promise((resolve, reject) => { 
+    if(isAuthed) { resolve(collection); } 
+    else { 
+      Stitch.defaultAppClient.auth.loginWithCredential(credential)
+      .then(authedId => { isAuthed = true; collection = mongoClient.db("vendor").collection("vendor-item"); resolve(collection); })
+      .catch(err => reject(err));
+    }
+  });
+};
