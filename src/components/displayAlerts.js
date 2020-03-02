@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
 
 class DisplayAlerts extends Component {
 

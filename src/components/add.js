@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AddForm from './addForm'
-import DisplayAlerts from './displayAlerts'
+import AddForm from './addForm';
+import DisplayAlerts from './displayAlerts';
 
 class Add extends Component {
 

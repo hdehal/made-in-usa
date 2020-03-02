@@ -3,8 +3,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory from 'react-bootstrap-table2-filter';
 
 // Modularized component imports
-import { item } from './stitchAuth'
-import { tableColumns } from './tableColumns'
+import { item } from './stitchAuth';
+import { tableColumns } from './tableColumns';
 
 class DisplayTable extends Component {
 
