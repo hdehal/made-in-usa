@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ReactGA from 'react-ga';
 
 // Modularized component imports
 import Home from './components/home';
@@ -10,6 +11,13 @@ import About from './components/about';
 import Error from './components/error';
 import Navigation from './components/navigation';
 import DisplayTable from './components/displayTable';
+
+function initializeReactGA() {
+  ReactGA.initialize('UA-159568942-1');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
+
+initializeReactGA()
 
 class App extends Component {
 
