@@ -80,20 +80,6 @@ class AddForm extends Component {
       });
     };
 
-    resetForm = () => {
-      // Reset and clear the forms
-      this.setState({
-        id: '',
-        company: '',
-        url: '',
-        loc: '',
-        gender: '',
-        checkboxIds: [],
-        isCaptchaVerified: false,
-        isVerified: false
-      })
-    }
-    
     onSubmit(e) {
         e.preventDefault();
 
@@ -105,7 +91,20 @@ class AddForm extends Component {
         .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
         .catch(err => console.error(`Failed to insert item: ${err}`))
 
-        this.resetForm()
+        // Reset and clear the forms
+        this.setState({
+          id: '',
+          company: '',
+          url: '',
+          loc: '',
+          gender: '',
+          checkboxIds: [],
+          isCaptchaVerified: false,
+          isVerified: false
+        })
+
+        // Reset the select option to the default null value or index
+        document.getElementById("genderSelect").selectedIndex = "0";
 
         // getData after insertOne new item
         // this.getData();
@@ -136,15 +135,15 @@ class AddForm extends Component {
             }
           }
 
-    // Animate submit button onClick
-    animateSubmit = () => {
-      this.setState({ 
-          animateSubmit: true 
-      });
-      setTimeout(()=>{
-        this.setState({animateSubmit: false});
-      }, 2000)
-    }
+          // Animate submit button onClick
+          animateSubmit = () => {
+            this.setState({ 
+                animateSubmit: true 
+            });
+            setTimeout(()=>{
+              this.setState({animateSubmit: false});
+            }, 2000)
+          }
 
   render() {
 
@@ -194,6 +193,7 @@ class AddForm extends Component {
                 <Form.Group>
                     <Form.Label>Gender:</Form.Label>
                     <select
+                      id="genderSelect"
                       className="form-control dropdown-toggle btn btn-secondary"
                       onChange={this.onChangeGender}
                       multiple={false}
@@ -238,9 +238,9 @@ class AddForm extends Component {
                 />
 
                 <Form.Group>
+
                     <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified} 
                     onClick={() => {
-                      this.resetForm();
                       this.animateSubmit();
                       resetRecaptcha()
                    }}>
@@ -251,7 +251,6 @@ class AddForm extends Component {
                     {/* <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button> */}
                     <Button className="btn" variant="danger" type="reset"
                     onClick={() => {
-                      this.resetForm();
                       resetRecaptcha()
                    }}>Reset</Button>
                 </Form.Group>
