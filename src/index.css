@@ -48,6 +48,9 @@ body {
 .form-label {
   font-weight: 600;
 }
+.btn-primary.disabled, .btn-primary:disabled {
+  opacity: 0.5;
+}
 .form-control.dropdown-toggle.btn.btn-secondary {
   width: max-content;
   margin-left: 0.5em;

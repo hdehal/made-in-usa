@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner'
 import { ObjectId } from 'bson';
 import Recaptcha from 'react-recaptcha';
 
@@ -34,7 +35,8 @@ class AddForm extends Component {
       loc: '',
       gender: '',
       isCaptchaVerified: false,
-      isVerified: false
+      isVerified: false,
+      animateSubmit: false
     }
   }
 
@@ -134,11 +136,23 @@ class AddForm extends Component {
             }
           }
 
+    // Animate submit button onClick
+    animateSubmit = () => {
+      this.setState({ 
+          animateSubmit: true 
+      });
+      setTimeout(()=>{
+        this.setState({animateSubmit: false});
+      }, 2000)
+    }
 
   render() {
 
     // Define checkboxes state
     const { checkboxes, checkboxIds } = this.state;
+
+    // Define animateSubmit state
+    const { animateSubmit } = this.state;
 
     // Recaptcha reset function
     let recaptchaInstance;
@@ -224,7 +238,16 @@ class AddForm extends Component {
                 />
 
                 <Form.Group>
-                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified} onClick={resetRecaptcha}>Submit</Button>
+                    <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified} 
+                    onClick={() => {
+                      this.resetForm();
+                      this.animateSubmit();
+                      resetRecaptcha()
+                   }}>
+                     { animateSubmit && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" style={{ marginRight: "4px" }} /> }
+                     { animateSubmit && <span>Submitting</span> }
+                     { !animateSubmit && <span>Submit</span> }
+                     </Button>
                     {/* <Button className="btn" variant="danger" onClick={this.onDelete}>Delete</Button> */}
                     <Button className="btn" variant="danger" type="reset"
                     onClick={() => {
