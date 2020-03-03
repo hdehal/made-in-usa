@@ -103,6 +103,9 @@ class AddForm extends Component {
           isVerified: false
         })
 
+        // Reset the select option to the default null value or index
+        document.getElementById("genderSelect").selectedIndex = "0";
+
         // getData after insertOne new item
         // this.getData();
         }
@@ -190,6 +193,7 @@ class AddForm extends Component {
                 <Form.Group>
                     <Form.Label>Gender:</Form.Label>
                     <select
+                      id="genderSelect"
                       className="form-control dropdown-toggle btn btn-secondary"
                       onChange={this.onChangeGender}
                       multiple={false}
