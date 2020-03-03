@@ -124,7 +124,7 @@ class AddForm extends Component {
           }
 
           onloadCallback() {
-            console.log("Captcha loaded!");
+            // console.log("Captcha loaded!");
           }
 
           // Recaptcha verification response
