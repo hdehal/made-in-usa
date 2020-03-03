@@ -55,6 +55,12 @@ body {
   width: max-content;
   margin-left: 0.5em;
 }
+.form-control.dropdown-toggle.btn.btn-secondary {
+  background-color: #DDD;
+  color: #000;
+  border: 0px;
+  font-size: 0.95em;  
+}
 /* Single radio button styling for delete functionality */
 .selection-cell input[type="radio"] {
   width: 100%;
