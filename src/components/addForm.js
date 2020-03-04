@@ -157,6 +157,9 @@ class AddForm extends Component {
     let recaptchaInstance;
     const resetRecaptcha = () => {
       recaptchaInstance.reset();
+      this.setState({
+        isCaptchaVerified: false
+      })
     };
 
     return(
@@ -170,6 +173,7 @@ class AddForm extends Component {
                         size="sm"
                         value={this.state.company}
                         onChange={this.onChangeCompanyName}
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
@@ -179,6 +183,7 @@ class AddForm extends Component {
                         size="sm"
                         value={this.state.url}
                         onChange={this.onChangeUrl}
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
@@ -188,11 +193,13 @@ class AddForm extends Component {
                         size="sm"
                         value={this.state.loc}
                         onChange={this.onChangeLoc}
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Gender:</Form.Label>
                     <select
+                      required
                       id="genderSelect"
                       className="form-control dropdown-toggle btn btn-secondary"
                       onChange={this.onChangeGender}
