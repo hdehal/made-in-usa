@@ -3,6 +3,20 @@ import { Map, CircleMarker, TileLayer, Tooltip, AttributionControl } from "react
 import "leaflet/dist/leaflet.css";
 import data from "./mapsData"
 
+// import
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+
+// setup
+const provider = new OpenStreetMapProvider();
+
+// search
+provider
+  .search({ query: '90210' })
+  .then(function(result) { 
+    // do something with result;
+    console.log(result);
+  });
+
 /* Adapted from https://github.com/afzalsayed96/bubbles-map by Afzal Sayed  */
 /* Map tiles proudly from Stamen Design in San Francisco https://stamen.com/maps/ */
 /* Additional help from http://leaflet-extras.github.io/leaflet-providers/preview/ */
