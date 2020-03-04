@@ -8,6 +8,7 @@ import ReactGA from 'react-ga';
 import Home from './components/home';
 import Add from './components/add';
 import About from './components/about';
+import Maps from './components/maps';
 import Error from './components/error';
 import Navigation from './components/navigation';
 import DisplayTable from './components/displayTable';
@@ -58,6 +59,7 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact/>
             <Route path="/add" component={() => <Add selected={this.state.selected} />} />
+            <Route path="/maps" component={Maps}/>
             <Route path="/about" component={About}/>
             <Route component={Error}/>
           </Switch>

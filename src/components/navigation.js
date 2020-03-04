@@ -12,6 +12,7 @@ const Navigation = () => {
                 <Nav className="mr-auto">
                     {/* <NavLink to="/">Home</NavLink> */}
                     <NavLink to="/add">Add Company</NavLink>
+                    <NavLink to="/maps">Maps</NavLink>
                 </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
