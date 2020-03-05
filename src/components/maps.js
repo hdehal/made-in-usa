@@ -39,9 +39,7 @@ class App extends Component {
             (await item())
             .find({"isVerified":true})
               .toArray()
-              .then(dataMaps => 
-                dataMaps.map(x=>{ return { ...x, id: x._id.toString()}; })
-              ).then(dataMaps => this.setState({dataMaps}))
+              .then(dataMaps => this.setState({dataMaps}))
       
               // Error logging
               .catch(err => {
@@ -82,14 +80,9 @@ class App extends Component {
               <CircleMarker
                 key={k}
                 center={[city["coordinates"][1], city["coordinates"][0]]}
-                radius={20 * Math.log(city["population"] / 10000000)}
+                /* radius={20 * Math.log(city["population"] / 10000000)} */
                 fillOpacity={0.5}
                 stroke={false}>
-                <Tooltip direction="right" offset={[-8, -2]} opacity={1}>
-                    {/* Fix Unexpected string concatenation of literals  no-useless-concat error */}
-                    <span>{city["name"] + ": " + "Population" + " " + city["population"]}</span>
-                    {/* <span>`${city["name"]|"Population"|city["population"]}`</span> */}
-                </Tooltip>
               </CircleMarker>)
           })
           }
