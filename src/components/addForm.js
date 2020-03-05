@@ -92,7 +92,7 @@ class AddForm extends Component {
     (async () => {
       let result = await provider.search({ query: this.state.loc });
       if (result && result.length > 0) {
-        const locXY = result[0].y + ',' + result[0].x;
+        const locXY = '[' + result[0].y + ', ' + result[0].x + ']';
         // Define array to inserted into the database
         var newItem = { company: this.state.company, url: this.state.url, loc: this.state.loc, coordinates: locXY, gender: this.state.gender, tags: this.state.checkboxIds, isVerified: this.state.isVerified }
       }
