@@ -29,9 +29,7 @@ class App extends Component {
         constructor(props){
             super(props);
     
-            this.state = {
-              dataMaps: []
-            }
+            this.state = {}
           }
       
           // Find database documents
@@ -39,7 +37,35 @@ class App extends Component {
             (await item())
             .find({"isVerified":true})
               .toArray()
-              .then(dataMaps => this.setState({dataMaps}))
+              .then(dataMaps => {
+
+                    // Array of "company" and "url" only
+                    var newArray = dataMaps.map(({_id, gender, loc, isVerified, tags, ...keepAttrs}) => keepAttrs)
+                    console.log(newArray);
+
+                    // Array of "loc" only
+                    var newArrayCityState = dataMaps.map(({_id, company, url, gender, isVerified, tags, ...keepAttrs}) => keepAttrs)
+                    const cityState = newArrayCityState.map(({ loc }) => [loc]);
+                    console.log(cityState);
+
+                    // Sequential for loop 
+                    var arrayLength = cityState.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        console.log(cityState[i]);
+
+                        // Typical search query should look like this:
+                        // .search({ query: 'cayucos, ca' })
+                        provider
+                        .search({ query: cityState[i] })
+
+                        .then(function(result) { 
+                            // do something with result;
+                            console.log(result[0].y + ',' + result[0].x);
+                        });
+                    }
+
+                })
+
       
               // Error logging
               .catch(err => {
@@ -49,35 +75,6 @@ class App extends Component {
       
           componentDidMount(){
             this.getData();
-          }
-
-          // Wait for state to update before we grab the data
-          componentDidUpdate() {
-            // Array of "company" and "url" only
-            var newArray = this.state.dataMaps.map(({_id, gender, loc, isVerified, tags, ...keepAttrs}) => keepAttrs)
-            console.log(newArray);
-
-            // Array of "loc" only
-            var newArrayCityState = this.state.dataMaps.map(({_id, company, url, gender, isVerified, tags, ...keepAttrs}) => keepAttrs)
-            const cityState = newArrayCityState.map(({ loc }) => [loc]);
-            console.log(cityState);
-
-            // Sequential for loop 
-            var arrayLength = cityState.length;
-            for (var i = 0; i < arrayLength; i++) {
-                console.log(cityState[i]);
-
-                // Typical search query should look like this:
-                // .search({ query: 'cayucos, ca' })
-                provider
-                .search({ query: cityState[i] })
-
-                .then(function(result) { 
-                    // do something with result;
-                    console.log(result[0].y + ',' + result[0].x);
-                });
-
-            }
           }
 
   render() {
