@@ -81,6 +81,9 @@ body {
   margin-left: 0.5em;
 }
 /* Header and nav styling */
+.navbar {
+  margin-bottom: 0em !important;
+}
 .navbar-nav a {
   margin-right: 0.25em;
 }

@@ -36,7 +36,7 @@ class Maps extends Component {
   // Find database documents
   async getData() {
     (await item())
-      .find({ "isVerified": false })
+      .find({"isVerified":true})
       .toArray()
       .then(dataMaps => this.setState({ dataMaps }))
 
@@ -56,7 +56,7 @@ class Maps extends Component {
       <div>
         <Map
           style={{ height: "480px", width: "100%", opacity: "0.9" }}
-          zoom={4.4}
+          zoom={4.25}
           center={[37.7687477, -99.6820275]}
           attributionControl={false}>
           <TileLayer url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
