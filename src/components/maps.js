@@ -38,33 +38,22 @@ class App extends Component {
             .find({"isVerified":true})
               .toArray()
               .then(async (dataMaps) => {
-
-                    // Array of "company" and "url" only
-                    var newArray = dataMaps.map(({_id, gender, loc, isVerified, tags, ...keepAttrs}) => keepAttrs)
-                    console.log(newArray);
-
-                    // Array of "loc" only
-                    var newArrayCityState = dataMaps.map(({_id, company, url, gender, isVerified, tags, ...keepAttrs}) => keepAttrs)
-                    const cityState = newArrayCityState.map(({ loc }) => [loc]);
-                    console.log(cityState);
-
-                    // Sequential for loop 
-                    var arrayLength = cityState.length;
-                    for (var i = 0; i < arrayLength; i++) {
-                            console.log(cityState[i]);
-                        try {
-                        let result = await provider.search({ query: cityState[i] });
-                        if(result && result.length > 0) {
-                            console.log(result[0].y + ',' + result[0].x);
-                        }
-                        }
-                        catch(e) {
-                            console.log(e);
-                        }
+                for(let index in dataMaps) {
+                  let city = dataMaps[index].loc;
+                  console.log(city);
+                  try {
+                    let result = await provider.search({ query: city });
+                    if(result && result.length > 0) {
+                        console.log(result[0].y + ',' + result[0].x);
+                        dataMaps[index].coordinates = [result[0].y, result[0].x];
                     }
-
-                })
-
+                  }
+                  catch(e) {
+                      console.log(e);
+                  }
+                }
+                console.log(dataMaps);
+              })
       
               // Error logging
               .catch(err => {
