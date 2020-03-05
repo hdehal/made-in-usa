@@ -25,36 +25,36 @@ const provider = new OpenStreetMapProvider();
 
 class App extends Component {
 
-        // Initial state
-        constructor(props){
-            super(props);
-    
-            this.state = {
-              dataMaps: []
-            }
-          }
-      
-          // Find database documents
-          async getData() {  
-            (await item())
-            .find({"isVerified":true})
-              .toArray()
-              .then(dataMaps => this.setState({dataMaps}))
-      
-              // Error logging
-              .catch(err => {
-                console.warn("Error:", err);
-              });
-          }
-      
-          componentDidMount(){
-            this.getData();
-            console.log(this.state.dataMaps)
-          }
-          
-          componentDidUpdate(){
-            console.log(this.state.dataMaps)
-          }
+  // Initial state
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dataMaps: []
+    }
+  }
+
+  // Find database documents
+  async getData() {
+    (await item())
+      .find({ "isVerified": false })
+      .toArray()
+      .then(dataMaps => this.setState({ dataMaps }))
+
+      // Error logging
+      .catch(err => {
+        console.warn("Error:", err);
+      });
+  }
+
+  componentDidMount() {
+    this.getData();
+    console.log(this.state.dataMaps)
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.dataMaps)
+  }
 
   render() {
 
@@ -62,23 +62,28 @@ class App extends Component {
       <div>
         <Map
           style={{ height: "480px", width: "100%", opacity: "0.9" }}
-          zoom={1}
+          zoom={4.4}
+          center={[37.7687477, -99.6820275]}
           attributionControl={false}>
-          <TileLayer url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png" 
-          attribution="Map by <a href='http://stamen.com' target='_blank'>Stamen Design</a> | Data &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors"
+          <TileLayer url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
+            attribution="Map by <a href='http://stamen.com' target='_blank'>Stamen Design</a> | Data &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors"
           />
 
-        <AttributionControl position="bottomright" prefix={false} />
+          <AttributionControl position="bottomright" prefix={false} />
 
-          {this.state.dataMaps.map((dataMaps, k) => {
+          {this.state.dataMaps.map((dataItem, k) => {
+            let { coordinates, company, url } = dataItem;
             return (
               <CircleMarker
                 key={k}
-                center={[dataMaps["coordinates"][1], dataMaps["coordinates"][0]]}
-                /* radius={20 * Math.log(city["population"] / 10000000)} */
+                center={[coordinates[0], coordinates[1]]}
                 fillOpacity={0.5}
-                stroke={false}>
-              </CircleMarker>)
+                stroke={true}>
+
+                <Tooltip direction="right" offset={[-8, -2]} opacity={1}>
+                  <span><a href={url}>{company}</a></span>
+                </Tooltip>
+              </CircleMarker>);
           })
           }
         </Map>
