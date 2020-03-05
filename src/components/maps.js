@@ -15,13 +15,13 @@ import { item } from './stitchAuth';
 const provider = new OpenStreetMapProvider();
 
 // Convert "City, State" or "ZIP" to lat/long coordinates using leaflet-geosearch plugin 
-provider
+/* provider
   .search({ query: 'Los Angeles, CA' })
   .then(function(result) { 
     // Result should look like this for Los Angeles:
     // 34.0536909,-118.2427666
     console.log(result[0].y + ',' + result[0].x);
-  });
+  }); */
 
 class App extends Component {
 

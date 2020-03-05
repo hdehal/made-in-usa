@@ -220,8 +220,8 @@ class AddForm extends Component {
             >
               <option value="">Select One</option>
               <option value="Everyone">Everyone</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
             </select>
           </Form.Group>
 
