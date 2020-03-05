@@ -1,10 +1,10 @@
 import React from 'react';
- 
+import Maps from './maps';
+
 const home = () => {
     return (
-        <div className="mainContainer">
-        </div>
+        <Maps />
     );
 }
- 
+
 export default home;

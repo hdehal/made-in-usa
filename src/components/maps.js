@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Map, CircleMarker, TileLayer, Tooltip, AttributionControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
+// import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 // Modularized component imports
 import { item } from './stitchAuth';
@@ -22,7 +22,7 @@ import { item } from './stitchAuth';
     console.log(result[0].y + ',' + result[0].x);
   }); */
 
-class App extends Component {
+class Maps extends Component {
 
   // Initial state
   constructor(props) {
@@ -48,11 +48,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getData();
-    console.log(this.state.dataMaps)
-  }
-
-  componentDidUpdate() {
-    console.log(this.state.dataMaps)
   }
 
   render() {
@@ -92,4 +87,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Maps;
