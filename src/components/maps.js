@@ -37,7 +37,7 @@ class App extends Component {
             (await item())
             .find({"isVerified":true})
               .toArray()
-              .then(dataMaps => {
+              .then(async (dataMaps) => {
 
                     // Array of "company" and "url" only
                     var newArray = dataMaps.map(({_id, gender, loc, isVerified, tags, ...keepAttrs}) => keepAttrs)
@@ -51,17 +51,16 @@ class App extends Component {
                     // Sequential for loop 
                     var arrayLength = cityState.length;
                     for (var i = 0; i < arrayLength; i++) {
-                        console.log(cityState[i]);
-
-                        // Typical search query should look like this:
-                        // .search({ query: 'cayucos, ca' })
-                        provider
-                        .search({ query: cityState[i] })
-
-                        .then(function(result) { 
-                            // do something with result;
+                            console.log(cityState[i]);
+                        try {
+                        let result = await provider.search({ query: cityState[i] });
+                        if(result && result.length > 0) {
                             console.log(result[0].y + ',' + result[0].x);
-                        });
+                        }
+                        }
+                        catch(e) {
+                            console.log(e);
+                        }
                     }
 
                 })
