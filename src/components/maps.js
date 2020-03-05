@@ -29,7 +29,9 @@ class App extends Component {
         constructor(props){
             super(props);
     
-            this.state = {}
+            this.state = {
+              dataMaps: []
+            }
           }
       
           // Find database documents
@@ -37,23 +39,9 @@ class App extends Component {
             (await item())
             .find({"isVerified":true})
               .toArray()
-              .then(async (dataMaps) => {
-                for(let index in dataMaps) {
-                  let city = dataMaps[index].loc;
-                  console.log(city);
-                  try {
-                    let result = await provider.search({ query: city });
-                    if(result && result.length > 0) {
-                        console.log(result[0].y + ',' + result[0].x);
-                        dataMaps[index].coordinates = [result[0].y, result[0].x];
-                    }
-                  }
-                  catch(e) {
-                      console.log(e);
-                  }
-                }
-                console.log(dataMaps);
-              })
+              .then(dataMaps => 
+                dataMaps.map(x=>{ return { ...x, id: x._id.toString()}; })
+              ).then(dataMaps => this.setState({dataMaps}))
       
               // Error logging
               .catch(err => {
