@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Map, CircleMarker, TileLayer, Tooltip, AttributionControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import data from "./mapsData"
 
 // Modularized component imports
 import { item } from './stitchAuth';
@@ -12,7 +11,7 @@ import { item } from './stitchAuth';
 /* Additional help from http://leaflet-extras.github.io/leaflet-providers/preview/ */
 
 // Provider for leaflet-geosearch plugin
-const provider = new OpenStreetMapProvider();
+// const provider = new OpenStreetMapProvider();
 
 // Convert "City, State" or "ZIP" to lat/long coordinates using leaflet-geosearch plugin 
 /* provider
@@ -72,7 +71,7 @@ class App extends Component {
           <AttributionControl position="bottomright" prefix={false} />
 
           {this.state.dataMaps.map((dataItem, k) => {
-            let { coordinates, company, url } = dataItem;
+            let { coordinates, company, url, loc } = dataItem;
             return (
               <CircleMarker
                 key={k}
@@ -82,6 +81,7 @@ class App extends Component {
 
                 <Tooltip direction="right" offset={[-8, -2]} opacity={1}>
                   <span><a href={url}>{company}</a></span>
+                  <span>{loc}</span>
                 </Tooltip>
               </CircleMarker>);
           })
