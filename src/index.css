@@ -8,6 +8,11 @@ body {
   background: rgb(204,204,204);
   background: linear-gradient(90deg, rgba(0,0,0,.05) 0%, rgba(255,255,255,1) 100%);
 }
+@media (max-width: 990px) {
+  body {
+    background: #FFF;
+  }
+}
 .table {
   background: #FFF;
 }
