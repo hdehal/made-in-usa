@@ -23,7 +23,10 @@ export const tableColumns = [
     dataField: 'company',
     text: 'Company',
     sort: true,
-    sortCaret: sortFunc
+    sortCaret: sortFunc,
+    headerStyle: (column, colIndex) => {
+        return { minWidth: '175px' }; 
+    }
 }, {
     dataField: 'url',
     text: 'URL',
@@ -36,7 +39,7 @@ export const tableColumns = [
     sort: true,
     sortCaret: sortFunc,
     headerStyle: (column, colIndex) => {
-        return { width: '175px' }; 
+        return { minWidth: '175px' }; 
     }
 }, {
     dataField: 'gender',
@@ -44,11 +47,11 @@ export const tableColumns = [
     sort: true,
     sortCaret: sortFunc,
     headerStyle: (column, colIndex) => {
-        return { width: '100px' };
+        return { minWidth: '120px' };
     }
 }, {
     dataField: 'tags',
-    text: 'Tags',
+    text: <span className='tagsLabel'>Tags</span>,
     sort: true,
     sortCaret: sortFunc,
     formatter: (cell) => {

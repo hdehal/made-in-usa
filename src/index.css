@@ -3,19 +3,28 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background: rgb(204,204,204);
   background: linear-gradient(90deg, rgba(0,0,0,.05) 0%, rgba(255,255,255,1) 100%);
-}
-@media (max-width: 990px) {
-  body {
-    background: #FFF;
-  }
 }
 .table {
   background: #FFF;
 }
+/* Mobile responsive breakpoint */
+@media (max-width: 990px) {
+  body {
+    background: #FFF;
+  }
+  .sortable .tagsLabel, .order:nth-last-child(2) {
+    display: none;
+}
+  .filter-label {
+    width: 100%;
+  }
+  [id^="text-filter-column"] {
+    margin-left: 0em !important;
+  }
+}
+
 /* Missing from Boostrap CSS */
 .caret {
   display:inline-block;
@@ -81,7 +90,7 @@ body {
 .filter-label {
   margin-bottom: 0px !important;
 }
-#text-filter-column-Tags {
+[id^="text-filter-column"] {
   background-color: #EEE;
   margin-left: 0.5em;
 }
