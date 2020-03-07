@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
+import { item } from './stitchAuth';
 import { Map, CircleMarker, TileLayer, Tooltip, AttributionControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-// import { OpenStreetMapProvider } from 'leaflet-geosearch';
-
-// Modularized component imports
-import { item } from './stitchAuth';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+require('react-leaflet-markercluster/dist/styles.min.css');
 
 /* Adapted from https://github.com/afzalsayed96/bubbles-map by Afzal Sayed  */
 /* Map tiles proudly from Stamen Design in San Francisco https://stamen.com/maps/ */
 /* Additional help from http://leaflet-extras.github.io/leaflet-providers/preview/ */
-
-// Provider for leaflet-geosearch plugin
-// const provider = new OpenStreetMapProvider();
-
-// Convert "City, State" or "ZIP" to lat/long coordinates using leaflet-geosearch plugin 
-/* provider
-  .search({ query: 'Los Angeles, CA' })
-  .then(function(result) { 
-    // Result should look like this for Los Angeles:
-    // 34.0536909,-118.2427666
-    console.log(result[0].y + ',' + result[0].x);
-  }); */
+/* Cluster functionality from https://www.npmjs.com/package/react-leaflet-markercluster */
 
 class Maps extends Component {
 
@@ -36,7 +24,7 @@ class Maps extends Component {
   // Find database documents
   async getData() {
     (await item())
-      .find({"isVerified":true})
+      .find({ "isVerified": true })
       .toArray()
       .then(dataMaps => this.setState({ dataMaps }))
 
@@ -57,6 +45,7 @@ class Maps extends Component {
         <Map
           style={{ height: "480px", width: "100%", opacity: "0.9" }}
           zoom={4.25}
+          maxZoom={20}
           center={[37.7687477, -99.6820275]}
           attributionControl={false}>
           <TileLayer url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
@@ -65,23 +54,28 @@ class Maps extends Component {
 
           <AttributionControl position="bottomright" prefix={false} />
 
-          {this.state.dataMaps.map((dataItem, k) => {
-            let { coordinates, company, url, loc } = dataItem;
-            return (
-              <CircleMarker
-                key={k}
-                center={[coordinates[0], coordinates[1]]}
-                fillOpacity={0.5}
-                stroke={true}>
+          <MarkerClusterGroup
+            spiderfyDistanceMultiplier={1}
+            showCoverageOnHover={false}
+          >
+            {this.state.dataMaps.map((dataItem, k) => {
+              let { coordinates, company, url, loc } = dataItem;
+              return (
+                <CircleMarker
+                  key={k}
+                  center={[coordinates[0], coordinates[1]]}
+                  position={[coordinates[0], coordinates[1]]}
+                >
+                  <Tooltip direction="right" offset={[-8, -2]} opacity={1}>
+                    <span><a href={url}>{company}</a></span>
+                    <span>{loc}</span>
+                  </Tooltip>
+                </CircleMarker>);
+            })}
+          </MarkerClusterGroup>
 
-                <Tooltip direction="right" offset={[-8, -2]} opacity={1}>
-                  <span><a href={url}>{company}</a></span>
-                  <span>{loc}</span>
-                </Tooltip>
-              </CircleMarker>);
-          })
-          }
         </Map>
+
       </div>
     );
   }

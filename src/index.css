@@ -158,3 +158,21 @@ td a {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+/* react-leaflet-markercluster overrides for CircleMarker */
+.marker-cluster-small {
+  background-color: rgba(51, 136, 255, 1) !important;
+}
+.marker-cluster-small div {
+  background-color: rgb(218, 233, 255) !important;
+}
+.marker-cluster-medium {
+  background-color: rgba(51, 136, 255, 1) !important;
+}
+.marker-cluster-medium div {
+  background-color: rgb(218, 233, 255) !important;
+}
+.marker-cluster-large {
+  background-color: rgba(51, 136, 255, 1) !important;}
+.marker-cluster-large div {
+  background-color: rgb(218, 233, 255) !important;
+}
