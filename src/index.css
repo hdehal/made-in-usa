@@ -14,6 +14,9 @@ body {
   body {
     background: #FFF;
   }
+  .leaflet-container {
+    height: 320px !important;
+  }
   .sortable .tagsLabel, .order:nth-last-child(2) {
     display: none;
 }
