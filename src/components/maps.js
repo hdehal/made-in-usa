@@ -40,12 +40,16 @@ class Maps extends Component {
 
   render() {
 
+    // Render map maxZoom based on mobile breakpoint
+    const isMobile = window.innerWidth < 480;
+    const showItems = isMobile ? 3 : 20;
+
     return (
       <div>
         <Map
           style={{ height: "480px", width: "100%", opacity: "0.9" }}
           zoom={4.25}
-          maxZoom={20}
+          maxZoom={showItems}
           center={[37.7687477, -99.6820275]}
           attributionControl={false}>
           <TileLayer url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
