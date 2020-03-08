@@ -57,6 +57,7 @@ class Maps extends Component {
           <MarkerClusterGroup
             spiderfyDistanceMultiplier={1}
             showCoverageOnHover={false}
+            maxClusterRadius={35}
           >
             {this.state.dataMaps.map((dataItem, k) => {
               let { coordinates, company, url, loc } = dataItem;
