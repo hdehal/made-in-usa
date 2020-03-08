@@ -78,7 +78,6 @@ class Maps extends Component {
                 </CircleMarker>);
             })}
           </MarkerClusterGroup>
-
         </Map>
       </div>
     );

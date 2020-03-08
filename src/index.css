@@ -124,11 +124,17 @@ td a {
   overflow: hidden;
 }
 /* Leaflet styling */
+.leaflet-container a {
+  color: #007bff !important;
+}
 .leaflet-tooltip span {
   display: block;
 }
 .leaflet-pane.leaflet-tooltip-pane span:first-of-type {
   font-weight: bold;
+}
+.leaflet-container .leaflet-control-attribution {
+  opacity: 0.75;
 }
 .leaflet-interactive {
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
