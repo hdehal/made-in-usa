@@ -127,6 +127,9 @@ td a {
 .leaflet-tooltip span {
   display: block;
 }
+.leaflet-pane.leaflet-tooltip-pane span:first-of-type {
+  font-weight: bold;
+}
 .leaflet-interactive {
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1s; /* Firefox < 16 */
