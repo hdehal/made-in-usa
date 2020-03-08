@@ -61,7 +61,7 @@ class Maps extends Component {
             {this.state.dataMaps.map((dataItem, k) => {
               let { coordinates, company, url, loc } = dataItem;
               return (
-                <CircleMarker
+                <CircleMarker onClick={() => { window.open(url) }}
                   key={k}
                   center={[coordinates[0], coordinates[1]]}
                   position={[coordinates[0], coordinates[1]]}
@@ -75,7 +75,6 @@ class Maps extends Component {
           </MarkerClusterGroup>
 
         </Map>
-
       </div>
     );
   }
