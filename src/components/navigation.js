@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
+import DisplayCount from './displayCount';
 
 const Navigation = () => {
     return (
@@ -14,6 +15,7 @@ const Navigation = () => {
                 </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
+                <DisplayCount />
                 <NavLink to="/about">
                     <Button size="sm" variant="secondary">About</Button>
                 </NavLink>
