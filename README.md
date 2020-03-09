@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/hdehal/made-in-usa/raw/master/public/app_screenshot.png)
+![Screenshot](https://github.com/hdehal/made-in-usa/raw/master/public/app_screenshot3.png)
 
 ## Get Started:
 1. Clone the repo:
