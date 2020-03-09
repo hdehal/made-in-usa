@@ -26,6 +26,9 @@ body {
   [id^="text-filter-column"] {
     margin-left: 0em !important;
   }
+  #basic-navbar-nav {
+    margin-bottom: 0.75em;
+  }
 }
 
 /* Missing from Boostrap CSS */
