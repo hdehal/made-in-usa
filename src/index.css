@@ -185,3 +185,6 @@ td a {
 .marker-cluster-large div {
   background-color: rgb(218, 233, 255) !important;
 }
+.marker-cluster-small:hover, .marker-cluster-medium:hover, .marker-cluster-large:hover {
+  box-shadow: inset 0 0 0 25px #0056b3 !important;
+}
