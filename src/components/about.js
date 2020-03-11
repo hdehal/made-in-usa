@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact, faBootstrap, faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faCloud } from '@fortawesome/free-solid-svg-icons'
+import { faCloud, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 const About = () => {
     return (
@@ -15,7 +15,7 @@ const About = () => {
                  </p>
                 <hr />
                 <p className="mb-0">
-                    This is a personal coding project built as a Single Page Application (SPA) using <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faReact} /> React</a> and <a href="https://react-bootstrap.github.io/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faBootstrap} /> Bootstrap</a> with a <a href="https://www.mongodb.com/cloud/atlas" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faCloud} /> cloud MongoDB service</a>. Open source and proudly hosted on <a href="https://github.com/hdehal/made-in-usa" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> GitHub</a>.
+                    This is a personal coding project built as a Single Page Application (SPA) using <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faReact} /> React</a>, <a href="https://react-bootstrap.github.io/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faBootstrap} /> Bootstrap</a>, and  <a href="https://react-leaflet.js.org/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faMapMarkerAlt} /> Leaflet</a> with a <a href="https://www.mongodb.com/cloud/atlas" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faCloud} /> Cloud MongoDB service</a>. Open source and proudly hosted on <a href="https://github.com/hdehal/made-in-usa" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> GitHub</a>.
             </p>
             </Alert>
         </div>
