@@ -194,6 +194,6 @@ td a {
 .marker-cluster-small:hover, .marker-cluster-medium:hover, .marker-cluster-large:hover {
   box-shadow: inset 0 0 0 25px #0056b3 !important;
 }
-.navbar .btn-sm:nth-last-child(2) {
+.navbar .btn.btn-success.btn-sm {
   margin-right: 1em;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge';
 import CountUp from 'react-countup';
@@ -36,17 +37,19 @@ class DisplayCount extends Component {
     render() {
 
         return (
-            <Button size="sm" variant="success" >
-                <Badge variant="light">
-                    <CountUp start={0} end={this.state.totalItems} delay={1}>
-                        {({ countUpRef }) => (
-                            <div>
-                                <span ref={countUpRef} />
-                            </div>
-                        )}
-                    </CountUp>
-                </Badge> Companies
+            <Link to="/">
+                <Button size="sm" variant="success" >
+                    <Badge variant="light">
+                        <CountUp start={0} end={this.state.totalItems} delay={1}>
+                            {({ countUpRef }) => (
+                                <div>
+                                    <span ref={countUpRef} />
+                                </div>
+                            )}
+                        </CountUp>
+                    </Badge> Companies
             </Button>
+            </Link>
         )
     }
 }
