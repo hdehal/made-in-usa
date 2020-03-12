@@ -11,6 +11,7 @@ import About from './components/about';
 import Error from './components/error';
 import Navigation from './components/navigation';
 import DisplayTable from './components/displayTable';
+import ScrollTop from './components/scrollTop';
 
 function initializeReactGA() {
   ReactGA.initialize('UA-159568942-1');
@@ -63,6 +64,8 @@ class App extends Component {
           </Switch>
 
           <DisplayTable handleOnSelectProp={this.handleOnSelect} />
+
+          <ScrollTop />
 
       </BrowserRouter>
     )
