@@ -6,8 +6,10 @@ class ScrollTop extends React.Component {
     constructor(props) {
         super(props);
 
+        this.scrollFunc = this.scrollFunc.bind(this);
+
         this.state = {
-            showScrollTop: ''
+            showScrollTop: false
         }
     }
 
@@ -16,7 +18,7 @@ class ScrollTop extends React.Component {
     }
 
     componentWillUnmount() {
-        window.addEventListener("scroll", this.scrollFunc)
+        window.removeEventListener("scroll", this.scrollFunc)
     }
 
     scrollFunc(e) {
@@ -37,7 +39,7 @@ class ScrollTop extends React.Component {
         return (
             <div className="scrollTop"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{ visibility: this.state.showScrollTop === false ? 'visible' : 'hidden' }}
+                style={{ visibility: this.state.showScrollTop === true ? 'visible' : 'hidden' }}
             >
                 Top
             </div>
