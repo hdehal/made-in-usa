@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 class ScrollTop extends React.Component {
 
@@ -37,11 +40,14 @@ class ScrollTop extends React.Component {
 
     render() {
         return (
-            <div className="scrollTop"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{ visibility: this.state.showScrollTop === true ? 'visible' : 'hidden' }}
-            >
-                Top
+            <div>
+                <Button
+                    className={this.state.showScrollTop === true ? 'scrollTop fadeIn' : 'scrollTop'}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    style={{ visibility: this.state.showScrollTop === true ? 'visible' : 'hidden' }}
+                    variant="success">
+                    <FontAwesomeIcon icon={faChevronUp} />
+                </Button>
             </div>
         );
     }
