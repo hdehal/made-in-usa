@@ -1,26 +1,43 @@
 import React from 'react';
 
-let showScrollTop = false;
-
-var scrollFunc = function () {
-    var y = window.scrollY;
-    if (y >= 800) {
-        showScrollTop = true;
-        console.log(showScrollTop)
-    } else {
-        showScrollTop = false;
-        console.log(showScrollTop)
-    }
-};
-
-window.addEventListener("scroll", scrollFunc);
-
 class ScrollTop extends React.Component {
+
+    // Initial state
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showScrollTop: ''
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.scrollFunc)
+    }
+
+    componentWillUnmount() {
+        window.addEventListener("scroll", this.scrollFunc)
+    }
+
+    scrollFunc(e) {
+        var y = window.scrollY;
+        if (y >= 100) {
+            this.setState({
+                showScrollTop: true
+            });
+
+        } else {
+            this.setState({
+                showScrollTop: false
+            });
+        }
+    };
+
     render() {
         return (
             <div className="scrollTop"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{ visibility: showScrollTop === false ? 'visible' : 'hidden' }}
+                style={{ visibility: this.state.showScrollTop === false ? 'visible' : 'hidden' }}
             >
                 Top
             </div>
