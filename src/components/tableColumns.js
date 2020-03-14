@@ -69,10 +69,11 @@ export const tableColumns = [
                                         : x === 'Dresses' ? "👗"
                                             : x === 'Formal' ? "Blazers, suits, etc."
                                                 : x === 'Shoes' ? "👟"
-                                                    : x === 'Swim' ? "Bikinis, trunks, etc."
-                                                        : x === 'Tops' ? "Shirts, OCBD, etc."
-                                                            : x === 'Undergarments' ? "Socks, underwear, etc."
-                                                                : null}
+                                                    : x === 'Sports' ? "🏃‍♀️"
+                                                        : x === 'Swim' ? "Bikinis, trunks, etc."
+                                                            : x === 'Tops' ? "Shirts, OCBD, etc."
+                                                                : x === 'Undergarments' ? "Socks, underwear, etc."
+                                                                    : null}
                             </Tooltip>
                         }
                     >

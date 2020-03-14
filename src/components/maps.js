@@ -3,7 +3,7 @@ import { item } from './stitchAuth';
 import { Map, CircleMarker, TileLayer, Tooltip, AttributionControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-require('react-leaflet-markercluster/dist/styles.min.css');
+import "react-leaflet-markercluster/dist/styles.min.css";
 
 /* Adapted from https://github.com/afzalsayed96/bubbles-map by Afzal Sayed  */
 /* Map tiles proudly from Stamen Design in San Francisco https://stamen.com/maps/ */
