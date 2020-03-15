@@ -217,3 +217,10 @@ td a {
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
 }
+/* Twemoji CSS */
+.emoji {
+  display: inline-block;
+  width: auto;
+  height: 1em;
+  vertical-align: -0.125em;
+}
