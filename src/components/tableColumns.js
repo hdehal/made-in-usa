@@ -3,6 +3,7 @@ import { textFilter } from 'react-bootstrap-table2-filter';
 import Badge from 'react-bootstrap/Badge';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
+import Twemoji from './twemoji'
 
 // Define sortCaret
 const sortFunc = (order, column) => {
@@ -66,10 +67,10 @@ export const tableColumns = [
                             <Tooltip>
                                 {x === 'Accessories' ? "Bags, belts, sunglasses, etc."
                                     : x === 'Bottoms' ? "Pants, shorts, skirts, etc."
-                                        : x === 'Dresses' ? "👗"
+                                        : x === 'Dresses' ? <><Twemoji emoji="👗" /></>
                                             : x === 'Formal' ? "Blazers, suits, etc."
-                                                : x === 'Shoes' ? "👟"
-                                                    : x === 'Sports' ? "🏃‍♀️"
+                                                : x === 'Shoes' ? <><Twemoji emoji="👟" /></>
+                                                    : x === 'Sports' ? <><Twemoji emoji="🏃‍♀️" /></>
                                                         : x === 'Swim' ? "Bikinis, trunks, etc."
                                                             : x === 'Tops' ? "Shirts, OCBD, etc."
                                                                 : x === 'Undergarments' ? "Socks, underwear, etc."
