@@ -118,7 +118,7 @@ body {
   margin: 1em;
 }
 /* recaptcha styling */
-#g-recaptcha {
+#ReCAPTCHA {
   margin: 1em 0em 1em 0em;
 }
 /* Truncate long links in table using pure CSS */

@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner'
 import { ObjectId } from 'bson';
-import Recaptcha from 'react-recaptcha';
+import ReCAPTCHA from "react-google-recaptcha";
 import "leaflet/dist/leaflet.css";
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
@@ -27,8 +27,8 @@ class AddForm extends Component {
     this.onDelete = this.onDelete.bind(this);
     this.onChangeisVerified = this.onChangeisVerified.bind(this);
 
-    this.onloadCallback = this.onloadCallback.bind(this);
-    this.verifyCallback = this.verifyCallback.bind(this);
+    this.registerRecaptcha = React.createRef();
+
 
     this.state = {
       // States for checkboxes
@@ -134,24 +134,16 @@ class AddForm extends Component {
     // this.getData();
   }
 
-  onloadCallback() {
-    // console.log("Captcha loaded!");
-  }
-
-  // Recaptcha verification response
-  verifyCallback(response) {
-    if (response) {
-      this.setState({
-        isCaptchaVerified: true
-      })
-    }
-  }
-
   // Animate submit button onClick
   animateSubmit = () => {
     this.setState({
       animateSubmit: true
     });
+  }
+
+  // Captcha Verification
+  handleRecaptureComplete = (value) => {
+    this.setState({ isCaptchaVerified: true })
   }
 
   render() {
@@ -162,19 +154,9 @@ class AddForm extends Component {
     // Define animateSubmit state
     const { animateSubmit } = this.state;
 
-    // Recaptcha reset function
-    let recaptchaInstance;
-
+    // Reset and re-generate Captcha
     const resetRecaptcha = () => {
-      recaptchaInstance.reset();
-      this.setState({
-        isCaptchaVerified: false,
-      })
-      setTimeout(() => {
-        this.setState({
-          animateSubmit: false
-        })
-      }, 2000);
+      this.registerRecaptcha.reset();
     };
 
     return (
@@ -231,9 +213,7 @@ class AddForm extends Component {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>
-              Category/Tags:
-                  </Form.Label>
+            <Form.Label>Category/Tags:</Form.Label>
             <div className="mb-3">
               {checkboxes.map(checkbox => (
                 <Form.Check inline
@@ -254,17 +234,18 @@ class AddForm extends Component {
             disabled
           />
 
-          <Recaptcha
+          <ReCAPTCHA
+            id="ReCAPTCHA"
             sitekey="6LdaT90UAAAAAPhUh2D2odXQQB47ilnXw2mhCwAj"
-            render="explicit"
-            onloadCallback={this.onloadCallback}
-            verifyCallback={this.verifyCallback}
-            ref={e => recaptchaInstance = e}
+            onChange={this.handleRecaptureComplete} // Successful completion of ReCAPTCHA
+            ref={(el) => {
+              this.registerRecaptcha = el;
+            }}
           />
 
           <Form.Group>
-
-            <Button id="addFormSubmit" type="submit" value="Submit" disabled={!this.state.isCaptchaVerified}
+            <Button id="addFormSubmit" type="submit" value="Submit"
+              disabled={!this.state.isCaptchaVerified}
               onClick={() => {
                 this.animateSubmit();
                 resetRecaptcha()
@@ -281,7 +262,6 @@ class AddForm extends Component {
               Reset
               </Button>
           </Form.Group>
-
         </form>
       </div>
     )
