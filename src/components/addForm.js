@@ -165,10 +165,12 @@ class AddForm extends Component {
 
     // Recaptcha reset function
     let recaptchaInstance;
+    
     const resetRecaptcha = () => {
       recaptchaInstance.reset();
       this.setState({
-        isCaptchaVerified: false
+        isCaptchaVerified: false,
+        animateSubmit: false
       })
     };
 
