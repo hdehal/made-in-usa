@@ -29,7 +29,6 @@ class AddForm extends Component {
 
     this.registerRecaptcha = React.createRef();
 
-
     this.state = {
       // States for checkboxes
       checkboxes: [{ id: "Accessories" }, { id: "Bottoms" }, { id: "Dresses" }, { id: "Formal" }, { id: "Shoes" }, { id: "Sports" }, { id: "Swim" }, { id: "Tops" }, { id: "Undergarments" }],
@@ -157,6 +156,14 @@ class AddForm extends Component {
     // Reset and re-generate Captcha
     const resetRecaptcha = () => {
       this.registerRecaptcha.reset();
+
+      setTimeout(() => {
+        this.setState({
+          isCaptchaVerified: false,
+          animateSubmit: false
+        });
+      }, 2000);
+
     };
 
     return (
