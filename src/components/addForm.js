@@ -23,7 +23,7 @@ class AddForm extends Component {
     this.onChangeUrl = this.onChangeUrl.bind(this);
     this.onChangeLoc = this.onChangeLoc.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onChangeisVerified = this.onChangeisVerified.bind(this);
 
@@ -85,7 +85,7 @@ class AddForm extends Component {
     });
   };
 
-  onSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
 
     // Convert "City, State" or "ZIP" to lat/long coordinates using leaflet-geosearch plugin 
@@ -181,7 +181,7 @@ class AddForm extends Component {
     return (
       <div className="mainContainer">
         <h4>Add New Company</h4>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label>Company Name:</Form.Label>
             <Form.Control
