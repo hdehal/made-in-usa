@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/hdehal/made-in-usa/raw/master/public/app_screenshot3.png)
+[<img src="https://github.com/hdehal/made-in-usa/raw/master/public/app_screenshot3.png">](https://madeinusa.li/st)
 
 ## Get Started:
 1. Clone the repo:
@@ -28,12 +28,16 @@ src/
     ├── add.js
     ├── addForm.js
     ├── displayAlerts.js
+    ├── displayCount.js
     ├── displayTable.js
     ├── error.js
     ├── home.js
+    ├── maps.js
     ├── navigation.js
+    ├── scrollTop.js
     ├── stitchAuth.js
-    └── tableColumns.js
+    ├── tableColumns.js
+    └── twemoji.js
 ```
 
 ## How to Deploy on GitHub Pages using Yarn and gh-pages:
