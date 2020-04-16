@@ -34,7 +34,7 @@
     "twemoji": "^12.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "deploy": "yarn run build && gh-pages -d build",
     "test": "react-scripts test",
