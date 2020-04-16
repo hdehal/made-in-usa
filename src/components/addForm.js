@@ -102,10 +102,8 @@ class AddForm extends Component {
         .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
         .catch(err => console.error(`Failed to insert item: ${err}`))
 
-      // Stop submit button animation when done inserting
-      this.setState({ animateSubmit: false })
-
       // Reset and clear the forms
+      // Stop submit button animation when done inserting
       this.setState({
         id: '',
         company: '',
@@ -114,7 +112,8 @@ class AddForm extends Component {
         gender: '',
         checkboxIds: [],
         isCaptchaVerified: false,
-        isVerified: false
+        isVerified: false,
+        animateSubmit: false
       })
 
       // Reset the select option to the default null value or index
