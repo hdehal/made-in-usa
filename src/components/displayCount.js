@@ -30,8 +30,21 @@ class DisplayCount extends Component {
             });
     }
 
+    // Timestamp
+    async getDate() {
+        (await item())
+            .findOne({}, { sort: { "_id": -1 } })
+            .then(data => console.log(data._id.getTimestamp()))
+
+            // Error logging
+            .catch(err => {
+                console.warn("Error:", err);
+            });
+    }
+
     componentDidMount() {
-        this.getData();
+        this.getData(); // Get data for count
+        this.getDate(); // Get date for getTimestamp
     }
 
     render() {
