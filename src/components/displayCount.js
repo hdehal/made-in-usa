@@ -34,7 +34,7 @@ class DisplayCount extends Component {
     async getDate() {
         (await item())
             .findOne({}, { sort: { "_id": -1 } })
-            .then(data => console.log(data._id.getTimestamp()))
+            .then(data => console.log(data._id.getTimestamp().toLocaleDateString("en-US")))
 
             // Error logging
             .catch(err => {
