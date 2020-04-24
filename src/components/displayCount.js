@@ -14,7 +14,8 @@ class DisplayCount extends Component {
         super(props);
 
         this.state = {
-            totalItems: ''
+            totalItems: '',
+            lastUpdate: ''
         }
     }
 
@@ -30,11 +31,12 @@ class DisplayCount extends Component {
             });
     }
 
-    // Timestamp
+    // Timestamp for lastUpdate
     async getDate() {
         (await item())
             .findOne({}, { sort: { "_id": -1 } })
-            .then(data => console.log(data._id.getTimestamp().toLocaleDateString("en-US")))
+            .then(data => data._id.getTimestamp().toLocaleDateString("en-US"))
+            .then(data => this.setState({ lastUpdate: data }))
 
             // Error logging
             .catch(err => {
@@ -51,6 +53,9 @@ class DisplayCount extends Component {
 
         return (
             <Link to="/">
+                <Button id="lastUpdate" size="sm" variant="link">
+                    Last Updated: {this.state.lastUpdate}
+                </Button>
                 <Button size="sm" variant="success" >
                     <Badge variant="light">
                         <CountUp start={0} end={this.state.totalItems} delay={1}>
@@ -61,7 +66,7 @@ class DisplayCount extends Component {
                             )}
                         </CountUp>
                     </Badge> Companies
-            </Button>
+                 </Button>
             </Link>
         )
     }

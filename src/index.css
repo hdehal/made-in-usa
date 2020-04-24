@@ -32,6 +32,9 @@ body {
   .navbar .btn.btn-sm {
     margin-bottom: 1em;
   }
+  #lastUpdate {
+    display: none;
+  }
 }
 
 /* Missing from Boostrap CSS */
@@ -112,6 +115,11 @@ body {
 }
 .navbar {
   margin-bottom: 1em;
+}
+#lastUpdate {
+  color: #6c757d;
+  text-decoration: none;
+  cursor: initial;
 }
 /* mainContainer styling */
 .mainContainer {
