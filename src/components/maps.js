@@ -52,8 +52,8 @@ class Maps extends Component {
           maxZoom={20}
           center={[37.7687477, -99.6820275]}
           attributionControl={false}>
-          <TileLayer url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
-            attribution="Map by <a href='http://stamen.com' target='_blank'>Stamen Design</a> | &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors"
+          <TileLayer url="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="Map &copy; <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors"
           />
 
           <AttributionControl position="bottomright" prefix={false} />
